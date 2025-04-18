@@ -1,0 +1,29 @@
+
+.slick-slider{
+    .slick-list{
+        width: 100%;
+        height: 506px !important; // Chiều cao của slider
+        margin: 0 auto; // Căn giữa slider
+            .slick-track{
+                .slick-slide{
+                    div {
+                        .slider-item{
+                            // border: 1px solid #ff0000; // Đường viền cho mỗi item
+                            display: flex;
+                            justify-content: center;  // Căn giữa theo chiều ngang
+                            align-items: center;      // Căn giữa theo chiều dọc
+                            width: 100%;
+                            height: 506px;
+                            img{
+                                width: 100%;        // Đảm bảo ảnh không vượt quá chiều rộng của div
+                                height:  100%;       // Đảm bảo ảnh không vượt quá chiều cao của div
+                                object-fit: fill;    // Giữ tỉ lệ ảnh, không bị cắt
+                                display: block;
+                        
+                            }
+                        }
+                    }
+                }
+            }
+    }
+}

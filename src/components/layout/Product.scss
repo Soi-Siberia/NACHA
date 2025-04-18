@@ -1,0 +1,37 @@
+.Product-container-full{
+    background-color: white;
+    .Product-container{
+        border: 1px solid red;
+        height: 800px;
+
+        .product-title{
+            padding-top: 10%;
+            border: 1px solid blue;
+            display: flex;
+            justify-items: center;
+            flex-direction: column;
+            align-items: center;
+            color: #BE1E4C ;
+            font-size: 16px;
+
+            .product-sub-title{
+                font-weight: 400;
+                font-size: 20px;
+                font-style: italic;
+            }
+            .title-main{
+                font-weight: 700;
+                font-size: 40px;
+                font-style: oblique;
+            }
+            
+            .unline{
+                width: 20%;
+                height: 5px;
+                background-color: #BE1E4C;
+                margin: 11px 0px;
+                border-radius: 20px;
+            }
+        }
+    }
+}
