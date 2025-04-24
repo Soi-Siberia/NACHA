@@ -1,12 +1,12 @@
 .Product-container-full{
     background-color: white;
     .Product-container{
-        border: 1px solid red;
-        height: 800px;
+        // border: 1px solid red;
+        height: auto;
 
         .product-title{
             padding-top: 10%;
-            border: 1px solid blue;
+            // border: 1px solid blue;
             display: flex;
             justify-items: center;
             flex-direction: column;
@@ -31,6 +31,63 @@
                 background-color: #BE1E4C;
                 margin: 11px 0px;
                 border-radius: 20px;
+            }
+        }
+        .product-list{
+            text-align: center;
+            .product-item{
+                opacity: 0;
+                transform: translateY(50px) scale(0.95); /* Bắt đầu với độ mờ và scale nhỏ hơn */
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Tăng thời gian hiệu ứng và sử dụng easing mượt mà */
+                transition-delay: 0s; /* Mặc định không có delay */
+              
+                &.visible {
+                  opacity: 1;
+                  transform: translateY(0) scale(1); /* Hiển thị phần tử và phóng to lên */
+                }
+                // border: 1px solid yellow;
+                img{
+                    border: 1px solid green;
+                    width: 100%;
+                    height: auto;
+                    padding: 5px;
+                }
+            }
+            .product-item-name{
+                a{
+                    text-decoration: none;
+                    color: #BE1E4C;
+                    font-size: 19px;
+                }
+            }
+            .product-item-mota{
+                padding: 5px;
+                color: #666;
+                font-weight: 400;
+            }
+            
+        }
+        .product-button{
+            text-align: center;
+
+            .btn-xemthem-product{
+                padding: 10px 20px;
+                background-color: #BE1E4C;
+                color: white;
+                margin-top: 30px;
+                border: none;
+                border-radius: 5px;
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+                font-size: 16px;
+                font-weight: 800;
+                font-style: revert;
+
+                &:hover{
+                    background-color: white;
+                    color: black;
+                    transform: scale(1.1);
+                }
             }
         }
     }

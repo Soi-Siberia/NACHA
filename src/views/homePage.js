@@ -3,7 +3,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux"
 import MenuHome from "../components/layout/menuheader"
 import Slider from "../components/layout/Slider"
-import Product  from "../components/layout/Product";
+import Product  from "../components/layout/Product"
+import LocationHomePage from "../components/layout/LocationHomePage"
+import Footer from "../components/Footer/Footer"
 import wrapper_img from "../assets/wrapper_img/wrapper.png"
 import "./homePage.scss"
 class homePage extends Component {
@@ -42,9 +44,10 @@ class homePage extends Component {
             </div>
           </div>
           <Product />
+          <LocationHomePage />
+          <Footer />
 
         </div>
-        <div style={{height: 300}}></div>
       </>
     );
   }

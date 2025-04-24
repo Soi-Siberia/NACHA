@@ -1,0 +1,101 @@
+// SelectionComponent.scss
+
+$primary-color: #BE1E4C;
+$hover-color: white;
+$disabled-color: #cccccc;
+$text-color: #BE1E4C;
+$light-text: #555;
+$border-color: #ddd;
+$background-color: #EAE7DE;
+$white: white;
+
+.selection-container-full{
+    margin-top: 40px !important;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: $background-color;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .title {
+        text-align: center;
+        color: $text-color;
+        margin-bottom: 20px;
+  }
+
+  .select-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: $light-text;
+    }
+  }
+
+  .select-box {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: $white;
+  }
+
+  .show-results-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: $primary-color;
+    color: $white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $hover-color;
+      color: black;
+    }
+
+    &:disabled {
+      background-color: $disabled-color;
+      cursor: not-allowed;
+    }
+  }
+
+  .results-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: $white;
+    border-radius: 4px;
+    border-left: 4px solid $primary-color;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .selection-container {
+    padding: 15px;
+
+    .select-box, 
+    .show-results-btn {
+      padding: 8px;
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .selection-container {
+    padding: 10px;
+
+    .title {
+      font-size: 20px;
+    }
+  }
+}

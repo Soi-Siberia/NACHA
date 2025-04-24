@@ -1,0 +1,157 @@
+.footer {
+    background-color: #8b0b32;
+    color: white;
+    padding: 40px 20px;
+    position: relative;
+  
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+      gap: 30px;
+  
+      .footer-logo {
+        flex: 1 1 100%;
+        text-align: center;
+  
+        img {
+          max-width: 180px;
+        }
+  
+        p {
+          margin-top: 10px;
+          font-size: 14px;
+        }
+      }
+  
+      .footer-links,
+      .footer-contact,
+      .footer-company {
+        flex: 1 1 250px;
+  
+        h3 {
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+  
+        ul {
+          list-style: none;
+          padding: 0;
+  
+          li {
+            margin-bottom: 5px;
+            cursor: pointer;
+          }
+        }
+  
+        p {
+          margin: 5px 0;
+          font-size: 14px;
+  
+          a {
+            color: #ffcdd2;
+            text-decoration: none;
+  
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 30px;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 14px;
+  
+      .highlight {
+        color: #ffd1dc;
+      }
+  
+      .footer-socials {
+        margin-top: 10px;
+  
+        // img {
+        //   width: 32px;
+        //   margin: 0 5px;
+        //   cursor: pointer;
+        // }
+      }
+    }
+  
+    .footer-call {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 99;
+  
+      .call-icon {
+        background-color: #fff;
+        border: 3px solid #8b0b32;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+  
+        img {
+          width: 30px;
+        }
+      }
+    }
+  
+    // 🔻 Responsive design
+    @media (max-width: 768px) {
+      .footer-top {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+  
+        .footer-links,
+        .footer-contact,
+        .footer-company {
+          flex: 1 1 100%;
+          margin-bottom: 20px;
+        }
+      }
+  
+      .footer-bottom {
+        font-size: 13px;
+  
+        .footer-socials img {
+          width: 28px;
+          margin: 0 4px;
+        }
+      }
+  
+      .footer-call {
+        .call-icon {
+          width: 50px;
+          height: 50px;
+  
+          img {
+            width: 24px;
+          }
+        }
+      }
+    }
+  
+    @media (max-width: 480px) {
+      padding: 30px 15px;
+  
+    //   .footer-top .footer-logo img {
+    //     max-width: 150px;
+    //   }
+  
+    //   .footer-bottom {
+    //     font-size: 12px;
+    //   }
+    }
+  }
+  
