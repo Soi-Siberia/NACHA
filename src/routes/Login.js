@@ -10,8 +10,6 @@ import passIcon from '../../src/assets/images/pass.svg';
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 
-import adminService from '../services/adminService';
-
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -51,27 +49,27 @@ class Login extends Component {
     processLogin = () => {
         const { username, password } = this.state;
 
-        const { adminLoginSuccess, adminLoginFail } = this.props;
-        let loginBody = {
-            username: 'admin',
-            password: '123456'
-        }
-        //sucess
+        // const { adminLoginSuccess, adminLoginFail } = this.props;
         let adminInfo = {
-            "tlid": "0",
-            "tlfullname": "Administrator",
-            "custype": "A",
-            "accessToken": "eyJhbGciOiJIU"
+            user: username,
+            password: password,
         }
+        // //sucess
+        // let adminInfo = {
+        //     "tlid": "0",
+        //     "tlfullname": "Administrator",
+        //     "custype": "A",
+        //     "accessToken": "eyJhbGciOiJIU"
+        // }
 
-        adminLoginSuccess(adminInfo);
+        this.props.adminLoginStart(adminInfo);
         this.refresh();
-        this.redirectToSystemPage();
-        try {
-            adminService.login(loginBody)
-        } catch (e) {
-            console.log('error login : ', e)
-        }
+        // this.redirectToSystemPage();
+        // try {
+        //     adminService.login(loginBody)
+        // } catch (e) {
+        //     console.log('error login : ', e)
+        // }
 
     }
 
@@ -165,7 +163,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
+        adminLoginStart: (adminInfo) => dispatch(actions.adminLoginStart(adminInfo)),
         adminLoginFail: () => dispatch(actions.adminLoginFail()),
     };
 };

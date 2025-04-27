@@ -36,6 +36,14 @@
             },
             "system-parameter": {
                 "header": "Tham số hệ thống"
+            },
+            "system-category": {
+                "header": "Danh Mục",
+                "manage-category": "Quản lý danh mục"
+            },
+            "system-product": {
+                "header": "Sản phẩm",
+                "manage-product": "Quản lý sản phẩm"
             }
         }
     },

@@ -12,12 +12,13 @@ import { path } from '../utils'
 
 import Home from '../routes/Home';
 import Login from '../routes/Login';
-import Header from './Header/Header';
 import System from '../routes/System';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 //views 
 import HomePage from '../views/homePage';
+import Categoty from '../routes/Categoty';
+import Product  from '../routes/Product';
 
 //cuộn chuột
 import CustomScrollbars from '../components/CustomScrollbars';
@@ -55,17 +56,33 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={'/category/'} component={userIsAuthenticated(Categoty)} />
+                                    <Route path={'/product/'} component={userIsAuthenticated(Product)} />
+
                                     //client
                                     <Route path={path.HomePage} component={(HomePage)} />
                                 </Switch>
                             </CustomScrollbars>
                         </span>
-
+{/* 
                         <ToastContainer
                             className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
                             autoClose={false} hideProgressBar={true} pauseOnHover={false}
                             pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
                             closeButton={<CustomToastCloseButton />}
+                        /> */}
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick={false}
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="colored"
+                            // transition={Bounce}
                         />
                     </div>
                 </Router>

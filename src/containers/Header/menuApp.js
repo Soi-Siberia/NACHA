@@ -20,4 +20,16 @@ export const adminMenu = [
             // { name: 'menu.system.system-parameter.header', link: '/system/system-parameter' },
         ]
     },
+
+    { //systeam quản lý người dùng
+        name: 'menu.system.system-category.header', menus: [
+            { name: 'menu.system.system-category.manage-category', link: '/category/manage-category' },
+        ]
+    },
+
+    { //systeam quản lý người dùng
+        name: 'menu.system.system-product.header', menus: [
+            { name: 'menu.system.system-product.manage-product', link: '/product/manage-product' },
+        ]
+    },
 ];
