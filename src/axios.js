@@ -23,6 +23,24 @@ export const isSuccessStatusCode = (s) => {
     return (statusType === 'number' && s === 0) || (statusType === 'string' && s.toUpperCase() === 'OK');
 };
 
+// 4. Interceptor REQUEST (trước khi gửi request đi)
+instance.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('accessToken'); // Lấy accessToken từ localStorage
+
+        if (token) {
+            // config.headers['x-access-token'] = token;
+            // Nếu server yêu cầu kiểu Authorization: Bearer <token>, đổi thành:
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        return config; // Trả về config đã gắn token
+    },
+    (error) => {
+        return Promise.reject(error); // Nếu lỗi khi chuẩn bị request
+    }
+);
+
 instance.interceptors.response.use(
     (response) => {
         // Thrown error for request with OK status code

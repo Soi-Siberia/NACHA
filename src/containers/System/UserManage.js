@@ -17,12 +17,23 @@ class UserManage extends Component {
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <div className="user-manage__form-group">
-                                <label htmlFor="fullName">Họ và Tên</label>
+                                <label htmlFor="fullName">Fist Name</label>
                                 <input
                                     type="text"
                                     id="fullName"
                                     className="form-control"
-                                    placeholder="Nhập họ và tên"
+                                    placeholder="Fist Name"
+                                />
+                            </div>
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <div className="user-manage__form-group">
+                                <label htmlFor="fullName">Last Name</label>
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    className="form-control"
+                                    placeholder="Last Name"
                                 />
                             </div>
                         </div>
