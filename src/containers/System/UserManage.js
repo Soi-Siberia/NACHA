@@ -1,30 +1,38 @@
+// src/containers/System/UserManage.jsx
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "../System/UserManage.scss";
-import * as action from "../../store/actions"
+import * as action from "../../store/actions";
 
 class UserManage extends Component {
-    state = {}
+    constructor(props){
+        super(props);
+        this.state ={
+            isAddUser: true
+        }
+    }
 
     componentDidMount() {
-        this.props.getAllUserStart()
+        let { getAllUserStart } = this.props;
+        getAllUserStart();
     }
 
     render() {
-        console.log("Giá trị user: ",this.props.users )
+        let { isAddUser } = this.state;
         return (
             <>
                 <div className="user-manage__title text-center mb-4">
                     Quản Lý Người Dùng
                 </div>
-                <div className='user-manage container'>
+                <div className="user-manage container">
                     <div className="row">
                         <div className="col-md-6 mb-3">
                             <div className="user-manage__form-group">
-                                <label htmlFor="fullName">Fist Name</label>
+                                <label htmlFor="firstName">Fist Name</label>
                                 <input
                                     type="text"
-                                    id="fullName"
+                                    id="firstName"
                                     className="form-control"
                                     placeholder="Fist Name"
                                 />
@@ -32,10 +40,10 @@ class UserManage extends Component {
                         </div>
                         <div className="col-md-6 mb-3">
                             <div className="user-manage__form-group">
-                                <label htmlFor="fullName">Last Name</label>
+                                <label htmlFor="lastName">Last Name</label>
                                 <input
                                     type="text"
-                                    id="fullName"
+                                    id="lastName"
                                     className="form-control"
                                     placeholder="Last Name"
                                 />
@@ -62,77 +70,68 @@ class UserManage extends Component {
                             </div>
                         </div>
                         <div className="col-12 mt-3">
-                            <button type="submit" className="btn btn-primary w-100">
+                            <button
+                                type="submit"
+                                disabled={isAddUser ? false : true}
+                                className="btn btn-primary w-100"
+                            >
+                                Thêm mới người dùng
+                            </button>
+                        </div>
+                        <div className="col-12 mt-3">
+                            <button
+                                type="submit"
+                                disabled={isAddUser ? true : false}
+                                className="btn btn-primary w-100"
+                            >
                                 Lưu Thông tin
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div className='list-user container mt-5'>
-                <table className="table">
+                <div className="list-user container mt-5">
+                    <div className="table-responsive">
+                        <table className="table">
                             <thead>
                                 <tr>
-                                <th scope="col">STT</th>
-                                <th scope="col">Tên Danh Mục</th>
-                                <th scope="col">description</th>
-                                <th scope="col">Trạng Thái</th>
-                                <th scope="col">Chức Năng</th>
-
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Fist Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Chức Năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                <th scope="row">1</th>
-                                <td>Trà sữa</td>
-                                <td>đây là món ngon nhất</td>
-                                <td>
-                                    <input type='checkbox'></input>
-                                </td>
-                                <td>
-                                    <button type="button" className="btn btn-success">Edit</button>
-                                    <button type="button" className="btn btn-danger">Xóa</button>
-                                </td>
+                                    <th scope="row">1</th>
+                                    <td>Nguyễn Văn</td>
+                                    <td>đây là món ngon nhất</td>
+                                    <td>Admin</td>
+                                    <td>
+                                        <div className="Chucnang">
+                                            <div className="form-check">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="defaultCheck1"
+                                                />
+                                                <label
+                                                    className="form-check-label"
+                                                    htmlFor="defaultCheck1"
+                                                >
+                                                    Khóa User
+                                                </label>
+                                            </div>
+                                            <div className="btn-sua">
+                                                <button className="btn btn-primary btn-sm">Checked</button>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr>
-                                <th scope="row">2</th>
-                                <td>Trà sữa</td>
-                                <td>đây là món ngon nhất</td>
-                                <td>
-                                    <input type='checkbox'></input>
-                                </td>
-                                <td>
-                                    <button type="button" className="btn btn-success">Edit</button>
-                                    <button type="button" className="btn btn-danger">Xóa</button>
-                                </td>
-                                </tr>
-                                <tr>
-                                <th scope="row">3</th>
-                                <td>Trà sữa</td>
-                                <td>đây là món ngon nhất</td>
-                                <td>
-                                    <input type='checkbox'></input>
-                                </td>
-                                <td>
-                                    <button type="button" className="btn btn-success">Edit</button>
-                                    <button type="button" className="btn btn-danger">Xóa</button>
-                                </td>
-                                </tr>
-                                <tr>
-                                <th scope="row">4</th>
-                                <td>Trà sữa</td>
-                                <td>đây là món ngon nhất</td>
-                                <td>
-                                    <input type='checkbox'></input>
-                                </td>
-                                <td>
-                                    <button type="button" className="btn btn-success">Edit</button>
-                                    <button type="button" className="btn btn-danger">Xóa</button>
-                                </td>
-                                </tr>
-                                
                             </tbody>
                         </table>
+                    </div>
                 </div>
             </>
         );
@@ -141,7 +140,8 @@ class UserManage extends Component {
 
 const mapStateToProps = state => {
     return {
-        users: state.user.users
+        users: state.user.users,
+        accessToken: state.admin.accessToken
     };
 };
 
