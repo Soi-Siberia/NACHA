@@ -1,6 +1,22 @@
 import axios from 'axios';
 import _ from 'lodash';
-import config from './config';
+// import config from './config';
+
+
+
+// Hàm lấy accessToken từ localStorage (dạng persist:admin)
+let getAccessToken = () => {
+    try {
+        const persistAdmin = localStorage.getItem('persist:admin');
+        if (persistAdmin) {
+            const parsed = JSON.parse(persistAdmin);
+            return parsed.accessToken?.replace(/^"|"$/g, '');
+        }
+    } catch (e) {
+        console.error('Cannot parse accessToken from persist:admin', e);
+    }
+    return null;
+};
 
 const instance = axios.create({
     baseURL: process.env.REACT_APP_BACKEND_URL,
@@ -26,7 +42,7 @@ export const isSuccessStatusCode = (s) => {
 // 4. Interceptor REQUEST (trước khi gửi request đi)
 instance.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('accessToken'); // Lấy accessToken từ localStorage
+        const token = getAccessToken(); // Lấy accessToken từ localStorage
 
         if (token) {
             // config.headers['x-access-token'] = token;

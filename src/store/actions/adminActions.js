@@ -1,6 +1,6 @@
 import actionTypes from './actionTypes';
 import adminService from '../../services/adminService';
-import { toast, Toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 

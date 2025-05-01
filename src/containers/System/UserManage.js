@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "../System/UserManage.scss";
+import * as action from "../../store/actions"
 
 class UserManage extends Component {
     state = {}
 
-    componentDidMount() {}
+    componentDidMount() {
+        this.props.getAllUserStart()
+    }
 
     render() {
+        console.log("Giá trị user: ",this.props.users )
         return (
             <>
                 <div className="user-manage__title text-center mb-4">
@@ -64,17 +68,87 @@ class UserManage extends Component {
                         </div>
                     </div>
                 </div>
+
+                <div className='list-user container mt-5'>
+                <table className="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">Tên Danh Mục</th>
+                                <th scope="col">description</th>
+                                <th scope="col">Trạng Thái</th>
+                                <th scope="col">Chức Năng</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <th scope="row">1</th>
+                                <td>Trà sữa</td>
+                                <td>đây là món ngon nhất</td>
+                                <td>
+                                    <input type='checkbox'></input>
+                                </td>
+                                <td>
+                                    <button type="button" className="btn btn-success">Edit</button>
+                                    <button type="button" className="btn btn-danger">Xóa</button>
+                                </td>
+                                </tr>
+                                <tr>
+                                <th scope="row">2</th>
+                                <td>Trà sữa</td>
+                                <td>đây là món ngon nhất</td>
+                                <td>
+                                    <input type='checkbox'></input>
+                                </td>
+                                <td>
+                                    <button type="button" className="btn btn-success">Edit</button>
+                                    <button type="button" className="btn btn-danger">Xóa</button>
+                                </td>
+                                </tr>
+                                <tr>
+                                <th scope="row">3</th>
+                                <td>Trà sữa</td>
+                                <td>đây là món ngon nhất</td>
+                                <td>
+                                    <input type='checkbox'></input>
+                                </td>
+                                <td>
+                                    <button type="button" className="btn btn-success">Edit</button>
+                                    <button type="button" className="btn btn-danger">Xóa</button>
+                                </td>
+                                </tr>
+                                <tr>
+                                <th scope="row">4</th>
+                                <td>Trà sữa</td>
+                                <td>đây là món ngon nhất</td>
+                                <td>
+                                    <input type='checkbox'></input>
+                                </td>
+                                <td>
+                                    <button type="button" className="btn btn-success">Edit</button>
+                                    <button type="button" className="btn btn-danger">Xóa</button>
+                                </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                </div>
             </>
         );
     }
 }
 
 const mapStateToProps = state => {
-    return {};
+    return {
+        users: state.user.users
+    };
 };
 
 const mapDispatchToProps = dispatch => {
-    return {};
+    return {
+        getAllUserStart: () => dispatch(action.getAllUserStart())
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserManage);
