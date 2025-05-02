@@ -4,8 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
-
-
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
 
 import { path } from '../utils'
@@ -14,7 +12,7 @@ import Home from '../routes/Home';
 import Login from '../routes/Login';
 import System from '../routes/System';
 
-import { CustomToastCloseButton } from '../components/CustomToast';
+// import { CustomToastCloseButton } from '../components/CustomToast';
 //views 
 import HomePage from '../views/homePage';
 import Categoty from '../routes/Categoty';
@@ -58,8 +56,7 @@ class App extends Component {
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                     <Route path={'/category/'} component={userIsAuthenticated(Categoty)} />
                                     <Route path={'/product/'} component={userIsAuthenticated(Product)} />
-
-                                    //client
+                                    {/*client*/}
                                     <Route path={path.HomePage} component={(HomePage)} />
                                 </Switch>
                             </CustomScrollbars>

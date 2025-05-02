@@ -7,7 +7,7 @@ export const getAllUserStart = () => {
         try {
             // console.log("===> Data login: ",loginInfor)
             let users = await userService.getAllUser()
-            console.log("==> log api trả: ",users)
+            // console.log("==> log api trả: ",users)
             if(users && users.errCode === 0)
             {
                 dispatch(getAllUserSuccess(users))

@@ -20,9 +20,11 @@ const adminPersistConfig = {
     whitelist: ['isLoggedIn', 'accessToken']
 };
 
-export default (history) => combineReducers({
+let createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
     admin: persistReducer(adminPersistConfig, adminReducer),
     user: userReducer,
     app: appReducer
 })
+
+export default createRootReducer;

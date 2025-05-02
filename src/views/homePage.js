@@ -38,7 +38,7 @@ class homePage extends Component {
                     </span>
                   </div>
                   <div className="xemthem-btn">
-                    <a href="#" className="btn btn-primary"><span className="xemthem">Tìm hiểu thêm</span></a>
+                    <a href="/" className="btn btn-primary"><span className="xemthem">Tìm hiểu thêm</span></a>
                   </div>
               </div>
             </div>

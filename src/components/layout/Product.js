@@ -50,7 +50,7 @@ class Product extends Component {
                   <img src={product_img} alt="product" />
                 </div>
                 <div className="product-item-name mt-3">
-                  <a href="#">Trà Sữa Mochi Triple Cheese</a>
+                  <a href="https://www.google.com/">Trà Sữa Mochi Triple Cheese</a>
                 </div>
                 <div className="product-item-mota mt-3">
                   <span>Phô Mai Nhung Lụa béo thơm được chế biến từ sữa tươi Thanh Trùng xen lẫn dâu tươi nghiền nhỏ cùng cấu trúc nổi mềm mịn như nhung vương nhẹ sắc hồng. Là biểu tượng của sự giàu sang, phú quý, Phô Mai Nhung Lụa mang đến sự sung túc cho năm mới và phơi phới tiền tài.</span>
@@ -62,7 +62,7 @@ class Product extends Component {
                   <img src={product_img} alt="product" />
                 </div>
                 <div className="product-item-name mt-3">
-                  <a href="#">Trà Sữa Mochi Triple Cheese</a>
+                  <a href="https://www.google.com/">Trà Sữa Mochi Triple Cheese</a>
                 </div>
                 <div className="product-item-mota mt-3">
                   <span>Phô Mai Nhung Lụa béo thơm được chế biến từ sữa tươi Thanh Trùng xen lẫn dâu tươi nghiền nhỏ cùng cấu trúc nổi mềm mịn như nhung vương nhẹ sắc hồng. Là biểu tượng của sự giàu sang, phú quý, Phô Mai Nhung Lụa mang đến sự sung túc cho năm mới và phơi phới tiền tài.</span>
@@ -74,7 +74,7 @@ class Product extends Component {
                   <img src={product_img} alt="product" />
                 </div>
                 <div className="product-item-name mt-3">
-                  <a href="#">Trà Sữa Mochi Triple Cheese</a>
+                  <a href="https://www.google.com/">Trà Sữa Mochi Triple Cheese</a>
                 </div>
                 <div className="product-item-mota mt-3">
                   <span>Phô Mai Nhung Lụa béo thơm được chế biến từ sữa tươi Thanh Trùng xen lẫn dâu tươi nghiền nhỏ cùng cấu trúc nổi mềm mịn như nhung vương nhẹ sắc hồng. Là biểu tượng của sự giàu sang, phú quý, Phô Mai Nhung Lụa mang đến sự sung túc cho năm mới và phơi phới tiền tài.</span>
@@ -86,7 +86,7 @@ class Product extends Component {
                   <img src={product_img} alt="product" />
                 </div>
                 <div className="product-item-name mt-3">
-                  <a href="#">Trà Sữa Mochi Triple Cheese</a>
+                  <a href="https://www.google.com/">Trà Sữa Mochi Triple Cheese</a>
                 </div>
                 <div className="product-item-mota mt-3">
                   <span>Phô Mai Nhung Lụa béo thơm được chế biến từ sữa tươi Thanh Trùng xen lẫn dâu tươi nghiền nhỏ cùng cấu trúc nổi mềm mịn như nhung vương nhẹ sắc hồng. Là biểu tượng của sự giàu sang, phú quý, Phô Mai Nhung Lụa mang đến sự sung túc cho năm mới và phơi phới tiền tài.</span>
@@ -98,7 +98,7 @@ class Product extends Component {
                   <img src={product_img} alt="product" />
                 </div>
                 <div className="product-item-name mt-3">
-                  <a href="#">Trà Sữa Mochi Triple Cheese</a>
+                  <a href="https://www.google.com/">Trà Sữa Mochi Triple Cheese</a>
                 </div>
                 <div className="product-item-mota mt-3">
                   <span>Phô Mai Nhung Lụa béo thơm được chế biến từ sữa tươi Thanh Trùng xen lẫn dâu tươi nghiền nhỏ cùng cấu trúc nổi mềm mịn như nhung vương nhẹ sắc hồng. Là biểu tượng của sự giàu sang, phú quý, Phô Mai Nhung Lụa mang đến sự sung túc cho năm mới và phơi phới tiền tài.</span>
@@ -110,7 +110,7 @@ class Product extends Component {
                   <img src={product_img} alt="product" />
                 </div>
                 <div className="product-item-name mt-3">
-                  <a href="#">Trà Sữa Mochi Triple Cheese</a>
+                  <a href="https://www.google.com/">Trà Sữa Mochi Triple Cheese</a>
                 </div>
                 <div className="product-item-mota mt-3">
                   <span>Phô Mai Nhung Lụa béo thơm được chế biến từ sữa tươi Thanh Trùng xen lẫn dâu tươi nghiền nhỏ cùng cấu trúc nổi mềm mịn như nhung vương nhẹ sắc hồng. Là biểu tượng của sự giàu sang, phú quý, Phô Mai Nhung Lụa mang đến sự sung túc cho năm mới và phơi phới tiền tài.</span>
@@ -122,7 +122,7 @@ class Product extends Component {
                   <img src={product_img} alt="product" />
                 </div>
                 <div className="product-item-name mt-3">
-                  <a href="#">Trà Sữa Mochi Triple Cheese</a>
+                  <a href="https://www.google.com/">Trà Sữa Mochi Triple Cheese</a>
                 </div>
                 <div className="product-item-mota mt-3">
                   <span>Phô Mai Nhung Lụa béo thơm được chế biến từ sữa tươi Thanh Trùng xen lẫn dâu tươi nghiền nhỏ cùng cấu trúc nổi mềm mịn như nhung vương nhẹ sắc hồng. Là biểu tượng của sự giàu sang, phú quý, Phô Mai Nhung Lụa mang đến sự sung túc cho năm mới và phơi phới tiền tài.</span>
@@ -134,7 +134,7 @@ class Product extends Component {
                   <img src={product_img} alt="product" />
                 </div>
                 <div className="product-item-name mt-3">
-                  <a href="#">Trà Sữa Mochi Triple Cheese</a>
+                  <a href="https://www.google.com/">Trà Sữa Mochi Triple Cheese</a>
                 </div>
                 <div className="product-item-mota mt-3">
                   <span>Phô Mai Nhung Lụa béo thơm được chế biến từ sữa tươi Thanh Trùng xen lẫn dâu tươi nghiền nhỏ cùng cấu trúc nổi mềm mịn như nhung vương nhẹ sắc hồng. Là biểu tượng của sự giàu sang, phú quý, Phô Mai Nhung Lụa mang đến sự sung túc cho năm mới và phơi phới tiền tài.</span>

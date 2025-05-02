@@ -4,12 +4,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import "../System/UserManage.scss";
 import * as action from "../../store/actions";
+import ModalUser from "../../containers/System/Modal/ModalUser"
 
 class UserManage extends Component {
     constructor(props){
         super(props);
         this.state ={
-            isAddUser: true
+            isAddUser: true,
+            listUser: "",
+
+            isModalUser: false
         }
     }
 
@@ -17,93 +21,90 @@ class UserManage extends Component {
         let { getAllUserStart } = this.props;
         getAllUserStart();
     }
+    componentDidUpdate(prevProps){
+        if(prevProps.users !== this.props.users)
+            {
+                this.setState({
+                    listUser: this.props.users?.data || "" 
+                })
+                // this.props.getAllUserStart()
+            } 
+    }
+
+    handleAddNew(){
+        console.log("=====> ADD user:")
+        this.setState({
+            isModalUser: true
+        })
+    }
+
+    toggle = () => {
+        this.setState(prevState => ({
+            isModalUser: !prevState.isModalUser
+        }));
+      };
+
+    
 
     render() {
-        let { isAddUser } = this.state;
+        let { isAddUser, listUser, isModalUser} = this.state;
+        console.log("List user: ", isModalUser)
         return (
             <>
-                <div className="user-manage__title text-center mb-4">
-                    Quản Lý Người Dùng
-                </div>
-                <div className="user-manage container">
-                    <div className="row">
-                        <div className="col-md-6 mb-3">
-                            <div className="user-manage__form-group">
-                                <label htmlFor="firstName">Fist Name</label>
-                                <input
-                                    type="text"
-                                    id="firstName"
-                                    className="form-control"
-                                    placeholder="Fist Name"
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <div className="user-manage__form-group">
-                                <label htmlFor="lastName">Last Name</label>
-                                <input
-                                    type="text"
-                                    id="lastName"
-                                    className="form-control"
-                                    placeholder="Last Name"
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <div className="user-manage__form-group">
-                                <label htmlFor="password">Mật khẩu</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    className="form-control"
-                                    placeholder="Password"
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <div className="user-manage__form-group">
-                                <label htmlFor="roleSelect">Chọn vai trò</label>
-                                <select className="form-control" id="roleSelect">
-                                    <option>Quản lý page</option>
-                                    <option>Admin</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className="col-12 mt-3">
-                            <button
-                                type="submit"
-                                disabled={isAddUser ? false : true}
-                                className="btn btn-primary w-100"
-                            >
-                                Thêm mới người dùng
-                            </button>
-                        </div>
-                        <div className="col-12 mt-3">
-                            <button
-                                type="submit"
-                                disabled={isAddUser ? true : false}
-                                className="btn btn-primary w-100"
-                            >
-                                Lưu Thông tin
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
                 <div className="list-user container mt-5">
+                    <button
+                        type="submit"
+                        disabled={isAddUser ? false : true}
+                        className="btn btn-primary w-100"
+                        onClick={() => this.handleAddNew()}
+                    >
+                            Thêm mới người dùng
+                    </button>
                     <div className="table-responsive">
-                        <table className="table">
+                        <table className="table table-hover table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">STT</th>
                                     <th scope="col">Fist Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Role</th>
-                                    <th scope="col">Chức Năng</th>
+                                    <th scope="col">Trạng Thái</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                {
+                                    listUser && listUser.length>0 ? (
+                                    listUser.map((user, index) => {
+                                    return (
+                                        <tr className='table-data' onClick={() => alert('Row clicked!')} key={index}>
+                                            <th scope="row">1</th>
+                                            <td>{user.firstName}</td>
+                                            <td>{user.lastName}</td>
+                                            <td>Admin</td>
+                                            <td>Kích Hoạt</td>
+                                            <td>
+                                                <div className="Chucnang">
+                                                    <div className="btn-sua">
+                                                        <button className="btn btn-primary btn-sm">Sửa</button>
+                                                    </div>
+                                                    <div className="btn-Xoa">
+                                                        <button className="btn btn-primary btn-sm">Xóa</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )})) : 
+                                    (
+                                        <tr>
+                                            <td colSpan="5" className="text-center">Không có người dùng nào</td>
+                                        </tr>
+                                    )
+                                }
+
+
+                                {/* <tr className='table-data'>
                                     <th scope="row">1</th>
                                     <td>Nguyễn Văn</td>
                                     <td>đây là món ngon nhất</td>
@@ -128,11 +129,16 @@ class UserManage extends Component {
                                             </div>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> */}
                             </tbody>
                         </table>
                     </div>
                 </div>
+
+                <ModalUser
+                    OpenModal = {isModalUser}
+                    toggleParent = {() => this.toggle()}
+                />
             </>
         );
     }

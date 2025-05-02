@@ -33,16 +33,16 @@ class slider extends Component {
       <React.Fragment>
           <Slider {...settings}>
             <div className="slider-item">
-                <img src={slider_img1}></img>
+                <img src={slider_img1} alt="slider1"></img>
             </div>
             <div className="slider-item">
-                <img src={slider_img2}></img>
+                <img src={slider_img2} alt="slider2"></img>
             </div>
             <div className="slider-item">
-                <img src={slider_img3}></img>
+                <img src={slider_img3} alt="slider3"></img>
             </div>
             <div className="slider-item">
-                <img src={slider_img4}></img>
+                <img src={slider_img4} alt="slider4"></img>
             </div>
           </Slider>
             
