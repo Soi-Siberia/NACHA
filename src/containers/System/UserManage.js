@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import "../System/UserManage.scss";
 import * as action from "../../store/actions";
 import ModalUser from "../../containers/System/Modal/ModalUser"
+import ModalUserEdit from './Modal/ModalUserEdit';
 
 class UserManage extends Component {
     constructor(props){
@@ -12,8 +13,12 @@ class UserManage extends Component {
         this.state ={
             isAddUser: true,
             listUser: "",
-
-            isModalUser: false
+            isModalUser: false,
+            isEdit: false,
+            //modaledit
+            isModalEdit: false,
+            dataUserEdit: "",
+            
         }
     }
 
@@ -32,7 +37,6 @@ class UserManage extends Component {
     }
 
     handleAddNew(){
-        console.log("=====> ADD user:")
         this.setState({
             isModalUser: true
         })
@@ -47,10 +51,13 @@ class UserManage extends Component {
       handlUserManager = (e, data) => {
         e.stopPropagation();
         if(e.target.name === 'edit') {
-            alert("Edit user: ", data)
+            this.setState({
+                isModalEdit: true,
+                dataUserEdit: data
+ })
         }
         if(e.target.name === 'delete') {
-            let confimDelete = window.confirm("Bạn có chắc chắn muốn xóa người dùng này không?")
+            let confimDelete = window.confirm("Bạn có chắc chắn không, Dữ liệu không thể khôi phục?")
             if(confimDelete === true) {
                 this.props.deleteUserStart(data.id)
                 // console.log("Delete user: ", data.id)
@@ -58,23 +65,37 @@ class UserManage extends Component {
         }
     }
 
-    getDataFromChild = (data) => {
+    getCreateNewUser = (data) => {
         // console.log("Data sent to parent: ", data)
         this.props.createNewUserStart(data)
     }
 
+    ////Modal Edit
+
+    toggleEdit = () => {
+        this.setState(prevState => ({
+            isModalEdit: !prevState.isModalEdit
+        }));
+    }
+
+    getUpdateUser = (data) => {
+        // console.log("Data sent to parent EDIT: ", data)
+        this.props.editUserStart(data)
+    }
+
+
+    /***************************/
+
     
 
     render() {
-        let { isAddUser, listUser, isModalUser} = this.state;
+        let { listUser, isModalUser, isModalEdit} = this.state;
         // console.log("List user: ", isModalUser)
         return (
             <>
-
                 <div className="list-user container mt-5">
                     <button
                         type="submit"
-                        disabled={isAddUser ? false : true}
                         className="btn btn-primary w-100"
                         onClick={() => this.handleAddNew()}
                     >
@@ -87,6 +108,7 @@ class UserManage extends Component {
                                     <th scope="col">STT</th>
                                     <th scope="col">Fist Name</th>
                                     <th scope="col">Last Name</th>
+                                    <th scope="col">Tài khoản</th>
                                     <th scope="col">Role</th>
                                     <th scope="col">Trạng Thái</th>
                                     <th scope="col">Action</th>
@@ -97,24 +119,26 @@ class UserManage extends Component {
                                     listUser && listUser.length>0 ? (
                                     listUser.map((user, index) => {
                                     return (
-                                        <tr className='table-data' onClick={() => alert('Row clicked!')} key={index}>
+                                        <tr className='table-data' key={index}>
                                             <th scope="row">1</th>
                                             <td>{user.firstName}</td>
                                             <td>{user.lastName}</td>
-                                            <td>Admin</td>
-                                            <td>Kích Hoạt</td>
+                                            <td>{user.user}</td>
+                                            <td>{user.role}</td>
+                                            <td>{user.is_active ? "Hoạt động" : "Khóa"}</td>
                                             <td>
                                                 <div className="Chucnang">
                                                     <div className="btn-sua">
                                                         <button 
                                                             className="btn btn-primary btn-sm"
                                                             name='edit'
-                                                            onClick={(e) => this.handlUserManager(e)}
+                                                            onClick={(e) => this.handlUserManager(e, user)}
                                                         >Sửa</button>
                                                     </div>
                                                     <div className="btn-Xoa">
                                                         <button 
                                                             className="btn btn-primary btn-sm"
+                                                            style={{backgroundColor: "red", border: "none"}}
                                                             name='delete'
                                                             onClick={(e) => this.handlUserManager(e, user)}
                                                         >Xóa</button>
@@ -130,33 +154,6 @@ class UserManage extends Component {
                                     )
                                 }
 
-
-                                {/* <tr className='table-data'>
-                                    <th scope="row">1</th>
-                                    <td>Nguyễn Văn</td>
-                                    <td>đây là món ngon nhất</td>
-                                    <td>Admin</td>
-                                    <td>
-                                        <div className="Chucnang">
-                                            <div className="form-check">
-                                                <input
-                                                    className="form-check-input"
-                                                    type="checkbox"
-                                                    id="defaultCheck1"
-                                                />
-                                                <label
-                                                    className="form-check-label"
-                                                    htmlFor="defaultCheck1"
-                                                >
-                                                    Khóa User
-                                                </label>
-                                            </div>
-                                            <div className="btn-sua">
-                                                <button className="btn btn-primary btn-sm">Checked</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr> */}
                             </tbody>
                         </table>
                     </div>
@@ -165,7 +162,14 @@ class UserManage extends Component {
                 <ModalUser
                     OpenModal = {isModalUser}
                     toggleParent = {() => this.toggle()}
-                    sentData = {this.getDataFromChild}
+                    sentData = {this.getCreateNewUser}
+                />
+
+                <ModalUserEdit 
+                    OpentEditModal = {isModalEdit}
+                    toggleParentModalEdit =  {() => this.toggleEdit()}
+                    dataUserEdit = {this.state.dataUserEdit}
+                    sentDataEdit = {this.getUpdateUser}
                 />
             </>
         );
@@ -184,6 +188,7 @@ const mapDispatchToProps = dispatch => {
         getAllUserStart: () => dispatch(action.getAllUserStart()),
         createNewUserStart: (data) => dispatch(action.createNewUserStart(data)),
         deleteUserStart: (userId) => dispatch(action.deleteUserStart(userId)),
+        editUserStart: (data) => dispatch(action.editUserStart(data)),
     };
 };
 

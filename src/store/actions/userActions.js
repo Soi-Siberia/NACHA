@@ -91,4 +91,34 @@ export const deleteUserFaild = () => ({
     type: actionTypes.DELETE_USER_FAILD,
 })
 
+//edit user
+export const editUserStart = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await userService.editUser(data)
+            if(res && res.errCode === 0)
+            {
+                toast.success("Cập nhật người dùng thành công")
+                dispatch(editUserSuccess())
+                dispatch(getAllUserStart())
+            }else{
+                toast.error(`Lỗi: ${res.message}`)
+                dispatch(editUserFaild())
+            }
+        } catch (e) {
+            toast.error(`Đã có lỗi xảy ra: ${e}`)
+            dispatch(editUserFaild())
+        }
+    }
+}
+
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS,
+})
+export const editUserFaild = () => ({
+    type: actionTypes.EDIT_USER_FAILD,
+})
+
+
+
 

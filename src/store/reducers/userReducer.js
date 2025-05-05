@@ -30,6 +30,14 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        case actionTypes.EDIT_USER_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.EDIT_USER_FAILD:
+            return {
+                ...state,
+            }  
         default:
             return state;
     }

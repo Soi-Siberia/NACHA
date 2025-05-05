@@ -15,6 +15,10 @@ const userService = {
         return axios.delete(`/v1/api/delete-user?id=${id}`)
     },
 
+    editUser(data) {
+        return axios.put('/v1/api/update-user', data)
+    }
+
 
 };
 
