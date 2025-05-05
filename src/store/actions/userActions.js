@@ -31,3 +31,64 @@ export const getAllUserFaild = (data) => ({
     type: actionTypes.GET_ALL_USER_FAILD,
     users: data
 })
+
+// Create new user
+
+export const createNewUserStart = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await userService.createNewUser(data)
+            if(res && res.errCode === 0)
+            {
+                toast.success("Thêm mới người dùng thành công")
+                dispatch(createNewUserSuccess())
+                dispatch(getAllUserStart())
+            }else{
+                toast.error(`Lỗi: ${res.message}`)
+                dispatch(createNewUserFaild())
+            }
+        } catch (e) {
+            toast.error(`Đã có lỗi xảy ra: ${e}`)
+            
+            // console.log("Đã có lỗi: ", e)
+            dispatch(createNewUserFaild())
+        }
+    }
+}
+export const createNewUserSuccess = () => ({
+    type: actionTypes.CREATE_NEW_USER_SUCCESS,
+})
+export const createNewUserFaild = () => ({
+    type: actionTypes.CREATE_NEW_USER_FAILD,
+})
+
+//delete user
+
+export const deleteUserStart = (userId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await userService.deleteUser(userId)
+            if(res && res.errCode === 0)
+            {
+                toast.success("Xóa người dùng thành công")
+                dispatch(deleteUserSuccess())
+                dispatch(getAllUserStart())
+            }else{
+                toast.error(`Lỗi: ${res.message}`)
+                dispatch(deleteUserFaild())
+            }
+        } catch (e) {
+            toast.error(`Đã có lỗi xảy ra: ${e}`)
+            dispatch(deleteUserFaild())
+        }
+    }
+}
+
+export const deleteUserSuccess = () => ({
+    type: actionTypes.DELETE_USER_SUCCESS,
+})
+export const deleteUserFaild = () => ({
+    type: actionTypes.DELETE_USER_FAILD,
+})
+
+

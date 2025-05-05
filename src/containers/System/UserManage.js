@@ -44,11 +44,30 @@ class UserManage extends Component {
         }));
       };
 
+      handlUserManager = (e, data) => {
+        e.stopPropagation();
+        if(e.target.name === 'edit') {
+            alert("Edit user: ", data)
+        }
+        if(e.target.name === 'delete') {
+            let confimDelete = window.confirm("Bạn có chắc chắn muốn xóa người dùng này không?")
+            if(confimDelete === true) {
+                this.props.deleteUserStart(data.id)
+                // console.log("Delete user: ", data.id)
+            }
+        }
+    }
+
+    getDataFromChild = (data) => {
+        // console.log("Data sent to parent: ", data)
+        this.props.createNewUserStart(data)
+    }
+
     
 
     render() {
         let { isAddUser, listUser, isModalUser} = this.state;
-        console.log("List user: ", isModalUser)
+        // console.log("List user: ", isModalUser)
         return (
             <>
 
@@ -87,10 +106,18 @@ class UserManage extends Component {
                                             <td>
                                                 <div className="Chucnang">
                                                     <div className="btn-sua">
-                                                        <button className="btn btn-primary btn-sm">Sửa</button>
+                                                        <button 
+                                                            className="btn btn-primary btn-sm"
+                                                            name='edit'
+                                                            onClick={(e) => this.handlUserManager(e)}
+                                                        >Sửa</button>
                                                     </div>
                                                     <div className="btn-Xoa">
-                                                        <button className="btn btn-primary btn-sm">Xóa</button>
+                                                        <button 
+                                                            className="btn btn-primary btn-sm"
+                                                            name='delete'
+                                                            onClick={(e) => this.handlUserManager(e, user)}
+                                                        >Xóa</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -138,6 +165,7 @@ class UserManage extends Component {
                 <ModalUser
                     OpenModal = {isModalUser}
                     toggleParent = {() => this.toggle()}
+                    sentData = {this.getDataFromChild}
                 />
             </>
         );
@@ -153,7 +181,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getAllUserStart: () => dispatch(action.getAllUserStart())
+        getAllUserStart: () => dispatch(action.getAllUserStart()),
+        createNewUserStart: (data) => dispatch(action.createNewUserStart(data)),
+        deleteUserStart: (userId) => dispatch(action.deleteUserStart(userId)),
     };
 };
 

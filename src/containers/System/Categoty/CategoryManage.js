@@ -16,7 +16,7 @@ class CategoryManage extends Component {
                         <div className="user-manage__title text-center mb-4">
                         Quản Lý Danh Mục Sản Phẩm
                         </div>
-                        <table class="table">
+                        <table className="table">
                             <thead>
                                 <tr>
                                 <th scope="col">STT</th>
@@ -36,8 +36,8 @@ class CategoryManage extends Component {
                                     <input type='checkbox'></input>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success">Edit</button>
-                                    <button type="button" class="btn btn-danger">Xóa</button>
+                                    <button type="button" className="btn btn-success">Edit</button>
+                                    <button type="button" className="btn btn-danger">Xóa</button>
                                 </td>
                                 </tr>
                                 <tr>
@@ -48,8 +48,8 @@ class CategoryManage extends Component {
                                     <input type='checkbox'></input>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success">Edit</button>
-                                    <button type="button" class="btn btn-danger">Xóa</button>
+                                    <button type="button" className="btn btn-success">Edit</button>
+                                    <button type="button" className="btn btn-danger">Xóa</button>
                                 </td>
                                 </tr>
                                 <tr>
@@ -60,8 +60,8 @@ class CategoryManage extends Component {
                                     <input type='checkbox'></input>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success">Edit</button>
-                                    <button type="button" class="btn btn-danger">Xóa</button>
+                                    <button type="button" className="btn btn-success">Edit</button>
+                                    <button type="button" className="btn btn-danger">Xóa</button>
                                 </td>
                                 </tr>
                                 <tr>
@@ -72,8 +72,8 @@ class CategoryManage extends Component {
                                     <input type='checkbox'></input>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success">Edit</button>
-                                    <button type="button" class="btn btn-danger">Xóa</button>
+                                    <button type="button" className="btn btn-success">Edit</button>
+                                    <button type="button" className="btn btn-danger">Xóa</button>
                                 </td>
                                 </tr>
                                 

@@ -40,37 +40,24 @@ class Login extends Component {
         this.setState({ password: e.target.value })
     }
 
-    redirectToSystemPage = () => {
-        const { navigate } = this.props;
-        const redirectPath = '/system/product-manage';
-        navigate(`${redirectPath}`);
-    }
+    // redirectToSystemPage = () => {
+    //     console.log('redirectToSystemPage');
+    //     const { navigate } = this.props;
+    //     const redirectPath = '/system/product-manage';
+    //     navigate(`${redirectPath}`);
+    // }
 
-    processLogin = () => {
+    processLogin =() => {
         const { username, password } = this.state;
 
-        // const { adminLoginSuccess, adminLoginFail } = this.props;
         let adminInfo = {
             user: username,
             password: password,
         }
-        // //sucess
-        // let adminInfo = {
-        //     "tlid": "0",
-        //     "tlfullname": "Administrator",
-        //     "custype": "A",
-        //     "accessToken": "eyJhbGciOiJIU"
-        // }
 
         this.props.adminLoginStart(adminInfo);
-        this.refresh();
-        // this.redirectToSystemPage();
-        // try {
-        //     adminService.login(loginBody)
-        // } catch (e) {
-        //     console.log('error login : ', e)
-        // }
-
+        console.log("===> Data login: ", adminInfo)
+        // this.refresh();
     }
 
     handlerKeyDown = (event) => {
@@ -156,7 +143,8 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        lang: state.app.language
+        lang: state.app.language,
+
     };
 };
 

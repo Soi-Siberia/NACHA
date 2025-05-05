@@ -2,7 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 const initialState = {
     isLoggedIn: false,
-    adminInfo: null,
+    // adminInfo: null,
     accessToken:null,
 }
 

@@ -14,6 +14,22 @@ const userReducer = (state = initialState, action) => {
         case actionTypes.GET_ALL_USER_FAILD:
             return {
             }
+        case actionTypes.CREATE_NEW_USER_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.CREATE_NEW_USER_FAILD:
+            return {
+                ...state,
+            }
+        case actionTypes.DELETE_USER_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.DELETE_USER_FAILD:
+            return {
+                ...state,
+            }
         default:
             return state;
     }

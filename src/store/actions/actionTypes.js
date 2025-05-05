@@ -10,7 +10,19 @@ const actionTypes = Object.freeze({
 
     //user
     GET_ALL_USER_SUCCESS: 'GET_ALL_USER_SUCCESS',
-    GET_ALL_USER_FAILD: 'GET_ALL_USER_FAILD'
+    GET_ALL_USER_FAILD: 'GET_ALL_USER_FAILD',
+
+    //create new user
+    CREATE_NEW_USER_SUCCESS: 'CREATE_NEW_USER_SUCCESS',
+    CREATE_NEW_USER_FAILD: 'CREATE_NEW_USER_FAILD',
+
+    //delete user
+    DELETE_USER_SUCCESS: 'DELETE_USER_SUCCESS',
+    DELETE_USER_FAILD: 'DELETE_USER_FAILD',
+
+    //edit user
+    EDIT_USER_SUCCESS: 'EDIT_USER_SUCCESS',
+    EDIT_USER_FAILD: 'EDIT_USER_FAILD',
 })
 
 export default actionTypes;
