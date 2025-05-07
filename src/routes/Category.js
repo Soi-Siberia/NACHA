@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
-import ManageCategory from "../containers/System/Categoty/CategoryManage"
+import ManageCategory from "../containers/System/Category/CategoryManage"
 
-// import RegisterPackageGroupOrAcc from '../containers/Categoty/RegisterPackageGroupOrAcc';
+// import RegisterPackageGroupOrAcc from '../containers/Category/RegisterPackageGroupOrAcc';
 import Header from'../containers/Header/Header';
 
-class Categoty extends Component {
+class Category extends Component {
     render() {
         const { systemMenuPath , isLoggedIn} = this.props;
         return (
@@ -37,4 +37,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categoty);
+export default connect(mapStateToProps, mapDispatchToProps)(Category);

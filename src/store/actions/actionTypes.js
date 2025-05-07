@@ -26,6 +26,14 @@ const actionTypes = Object.freeze({
     //edit user
     GET_USER_EDIT_SUCCESS: 'GET_USER_EDIT_SUCCESS',
     GET_USER_EDIT_FAILD: 'GET_USER_EDIT_FAILD',
+
+
+    //crate Category
+    CREATE_CATEGORY_SUCCESS: 'CREATE_CATEGORY_SUCCESS',
+    CREATE_CATEGORY_FAILD: 'CREATE_CATEGORY_FAILD',
+    //get all category
+    GET_ALL_CATEGORY_SUCCESS: 'GET_ALL_CATEGORY_SUCCESS',
+    GET_ALL_CATEGORY_FAILD: 'GET_ALL_CATEGORY_FAILD',
 })
 
 export default actionTypes;

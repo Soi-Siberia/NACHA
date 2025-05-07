@@ -114,7 +114,7 @@ class ModalUser extends Component {
                                 <select className="form-control" name="role"
                                     value={role}
                                     onChange={(e)=> this.handlUserManager(e)}>
-                                    <option>Quản lý page</option>
+                                    <option>USER</option>
                                     <option>Admin</option>
                                     
                                 </select>
