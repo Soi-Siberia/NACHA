@@ -34,6 +34,12 @@ const actionTypes = Object.freeze({
     //get all category
     GET_ALL_CATEGORY_SUCCESS: 'GET_ALL_CATEGORY_SUCCESS',
     GET_ALL_CATEGORY_FAILD: 'GET_ALL_CATEGORY_FAILD',
+    //delete category
+    DELETE_CATEGORY_SUCCESS: 'DELETE_CATEGORY_SUCCESS',
+    DELETE_CATEGORY_FAILD: 'DELETE_CATEGORY_FAILD',
+    //edit category
+    EDIT_CATEGORY_SUCCESS: 'EDIT_CATEGORY_SUCCESS',
+    EDIT_CATEGORY_FAILD: 'EDIT_CATEGORY_FAILD',
 })
 
 export default actionTypes;

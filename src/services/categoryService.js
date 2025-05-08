@@ -9,6 +9,12 @@ const categoryService = {
     getAllCategory(){
         return axios.get('/v1/api/get-all-catagory')
     },
+    deleteCategory(id){
+        return axios.delete(`/v1/api/delete-catagory?id=${id}`)
+    },
+    editCategory(data){
+        return axios.put('/v1/api/update-catagory', data)
+    },
 
 };
 

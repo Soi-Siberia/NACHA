@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import "../System/CategoryManage.scss";
 import * as action from '../../../store/actions';
 import ModalCategory from '../Modal/ModalCategory.js';
+import ModalEditCategory from '../Modal/ModalCategoryEdit.js';
 
 class CategoryManage extends Component {
     constructor(props){
@@ -11,6 +12,8 @@ class CategoryManage extends Component {
         this.state ={
             isOpenNewCategory: false,
             listCategory: "",
+            isOpenEditCategory: false,
+            dataEditCategory: '',
         }
     }
 
@@ -44,14 +47,47 @@ class CategoryManage extends Component {
     }
     // call api lấy create category
     handlCreateNewCaterory = (data) => {
-        console.log("data create category: ", data)
+        // console.log("data create category: ", data)
         this.props.createNewCategoryStart(data)
     }
+
+    // đóng modal sửa category
+    toggleEditCategory = () => {
+        this.setState({
+            isOpenEditCategory: !this.state.isOpenEditCategory,
+            dataEditCategory: ''
+        })
+    }
+
+
+    // button sửa và xóa category
+    handlUserManager = (e, item) => {
+        let nameBtn = e.target.name;
+        if(nameBtn === 'edit'){
+            this.setState({
+                isOpenEditCategory: true,
+                dataEditCategory: item
+            })
+
+        }else if(nameBtn === 'delete'){
+            let confimDelete = window.confirm("Bạn có chắc chắn không, Dữ liệu không thể khôi phục?")
+            if(confimDelete === true) {
+                this.props.deleteCategoryStart(item.id)
+            }
+        }
+    }
+
+    // call api sửa category
+    handlEditCaterory = (data) => {
+        // console.log("data edit category: ", data)
+        this.props.editCategoryStart(data)
+    }
+
     
 
     render() {
-        let {listCategory, isOpenNewCategory} = this.state;
-        console.log("==> list category ", listCategory)
+        let {listCategory, isOpenNewCategory, isOpenEditCategory, dataEditCategory} = this.state;
+        // console.log("==> list category ", listCategory)
         return (
             <>
                 <div className="list-category container mt-5">
@@ -90,7 +126,7 @@ class CategoryManage extends Component {
                                                 )}
                                             </td>
                                             <td>{item.description}</td>
-                                            <td>{item.is_active}</td>
+                                            <td>{item.is_active ? "Mở": "Đóng"}</td>
                                             <td>
                                                 <div className="Chucnang">
                                                     <div className="btn-sua">
@@ -124,18 +160,18 @@ class CategoryManage extends Component {
                     </div>
                 </div>
 
-                 <ModalCategory
+                <ModalCategory
                     OpenNewCategory = {isOpenNewCategory}
                     toggleNewCategory = {() => this.toggle()}
                     dataCreate = {this.handlCreateNewCaterory}
                 />
-                {/*
-                <ModalUserEdit 
-                    OpentEditModal = {isModalEdit}
-                    toggleParentModalEdit =  {() => this.toggleEdit()}
-                    dataUserEdit = {this.state.dataUserEdit}
-                    sentDataEdit = {this.getUpdateUser}
-                /> */}
+
+                <ModalEditCategory 
+                    OpenEditCategory = {isOpenEditCategory}
+                    toggleEditCategory = {() => this.toggleEditCategory()}
+                    dataEditCategory = {dataEditCategory}
+                    dataUpdate = {this.handlEditCaterory}
+                />
             </>
         );
     }
@@ -151,6 +187,8 @@ const mapDispatchToProps = dispatch => {
     return {
         createNewCategoryStart: (data) => dispatch(action.createNewCategoryStart(data)),
         getAllCategoryStart: () => dispatch(action.getAllCategoryStart()),
+        deleteCategoryStart: (id) => dispatch(action.deleteCategoryStart(id)),
+        editCategoryStart:(data) => dispatch(action.editCategoryStart(data)),
     };
 };
 

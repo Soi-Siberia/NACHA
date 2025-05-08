@@ -23,6 +23,22 @@ const categoryReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        case actionTypes.DELETE_CATEGORY_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.DELETE_CATEGORY_FAILD:
+            return {
+                ...state,
+            }
+        case actionTypes.EDIT_CATEGORY_SUCCESS:
+            return {
+                ...state,
+            }
+        case actionTypes.EDIT_CATEGORY_FAILD:
+            return {
+                ...state,
+            }
         default:
             return state;
     }
