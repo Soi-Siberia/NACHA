@@ -115,7 +115,9 @@ class CategoryManage extends Component {
                                     listCategory && listCategory.length>0 ? (
                                     listCategory.map((item, index) => {
                                     return (
-                                        <tr className='table-data' key={index}>
+                                        <tr className='table-data'
+                                            style={{verticalAlign:'baseline'}} 
+                                            key={index}>
                                             <th scope="row">{index+1}</th>
                                             <td>{item.name}</td>
                                             <td>
@@ -128,10 +130,11 @@ class CategoryManage extends Component {
                                             <td>{item.description}</td>
                                             <td>{item.is_active ? "Mở": "Đóng"}</td>
                                             <td>
-                                                <div className="Chucnang">
+                                                <div className="Chucnang" style={{display: 'flex', gap: '10px'}}>
                                                     <div className="btn-sua">
                                                         <button 
                                                             className="btn btn-primary btn-sm"
+                                                            style={{padding: '0px 10px'}}
                                                             name='edit'
                                                             onClick={(e) => this.handlUserManager(e, item)}
                                                         >Sửa</button>
@@ -139,7 +142,7 @@ class CategoryManage extends Component {
                                                     <div className="btn-Xoa">
                                                         <button 
                                                             className="btn btn-primary btn-sm"
-                                                            style={{backgroundColor: "red", border: "none"}}
+                                                            style={{padding: '0px 10px',backgroundColor: "red", border: "none"}}
                                                             name='delete'
                                                             onClick={(e) => this.handlUserManager(e, item)}
                                                         >Xóa</button>
