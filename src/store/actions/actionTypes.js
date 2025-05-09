@@ -40,6 +40,11 @@ const actionTypes = Object.freeze({
     //edit category
     EDIT_CATEGORY_SUCCESS: 'EDIT_CATEGORY_SUCCESS',
     EDIT_CATEGORY_FAILD: 'EDIT_CATEGORY_FAILD',
+
+    //create new product
+    CREATE_NEW_PRODUCT_SUCCESS: 'CREATE_NEW_PRODUCT_SUCCESS',
+    CREATE_NEW_PRODUCT_FAILD: 'CREATE_NEW_PRODUCT_FAILD',
+    //get all product
 })
 
 export default actionTypes;

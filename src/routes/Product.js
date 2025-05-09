@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
-import ProductManage from '../containers/System/ProductManage';
+import productManager from '../containers/System/Product/ProductManager'
 
 // import RegisterPackageGroupOrAcc from '../containers/Product/RegisterPackageGroupOrAcc';
 import Header from'../containers/Header/Header';
@@ -15,7 +15,7 @@ class Product extends Component {
             <div className="system-container">
                 <div className="system-list">
                     <Switch>
-                        <Route path="/product/manage-product" component={ProductManage} />
+                        <Route path="/product/manage-product" component={productManager} />
                         <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />
                     </Switch>
                 </div>
