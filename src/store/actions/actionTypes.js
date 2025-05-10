@@ -44,7 +44,10 @@ const actionTypes = Object.freeze({
     //create new product
     CREATE_NEW_PRODUCT_SUCCESS: 'CREATE_NEW_PRODUCT_SUCCESS',
     CREATE_NEW_PRODUCT_FAILD: 'CREATE_NEW_PRODUCT_FAILD',
+
     //get all product
+    GET_ALL_PRODUCT_SUCCESS: 'GET_ALL_PRODUCT_SUCCESS',
+    GET_ALL_PRODUCT_FAILD: 'GET_ALL_PRODUCT_FAILD',
 })
 
 export default actionTypes;

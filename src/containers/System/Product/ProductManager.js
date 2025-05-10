@@ -10,11 +10,14 @@ class ProductManager extends Component {
         this.state = {
             isOpenAddNew: false,
             listCategory: [],
+
+            listProducts: [],
         };
     }
 
     componentDidMount() {
         this.props.getAllCategoryStart();
+        this.props.getAllProductStart();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -23,6 +26,13 @@ class ProductManager extends Component {
             let data = this.buildDataInputSelect(this.props.listCategory);
             this.setState({
                 listCategory: data
+            })
+        }
+
+        if(prevProps.listProducts !== this.props.listProducts) {
+            // console.log('listProducts', this.props.listProducts)
+            this.setState({
+                listProducts: this.props.listProducts
             })
         }
     }
@@ -58,14 +68,16 @@ class ProductManager extends Component {
         })
     }
 
+    //call redux create new product
     handelCreateNewProduct = (data) => {
-        console.log('===> data chill sent', data)
+        // console.log('===> data chill sent', data)
         this.props.createNewProductStart(data);
     }
 
 
     render() {
-        let { isOpenAddNew, listCategory } = this.state;
+        let { isOpenAddNew, listCategory, listProducts } = this.state;
+        console.log('===> listProducts', listProducts)
         return (
             <>
                 <div className='container-full'>
@@ -78,6 +90,75 @@ class ProductManager extends Component {
                                 <div className='product-manage-add-new' style={{ textAlign: 'center' }}>
                                     <button className='btn btn-primary' onClick={()=> this.handleOpenModalAdd()}>Thêm mới sản phẩm</button>
                                 </div>
+
+                                <div className="table-responsive">
+                                    <table className="table table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">STT</th>
+                                                <th scope="col">Tên Sản Phẩm</th>
+                                                <th scope="col">Hình ảnh</th>
+                                                <th scope="col">Mô tả</th>
+                                                <th scope="col">Danh Mục</th>
+                                                <th scope="col">Giá</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                listProducts && listProducts.length>0 ? (
+                                                listProducts.map((item, index) => {
+                                                return (
+                                                    <tr className='table-data'
+                                                        style={{verticalAlign:'baseline'}} 
+                                                        key={index}>
+                                                        <th scope="row">{index+1}</th>
+                                                        <td>{item.name}</td>
+                                                        <td>
+                                                            {item.imgBlod && item.imgBlod.length > 50 ? (
+                                                                <img src={item.imgBlod} alt="item" style={{width: '80px', height: '80px'}} />
+                                                            ) : (
+                                                                <span>Chưa úp ảnh</span>
+                                                            )}
+                                                        </td>
+                                                        <td>{item.description}</td>
+                                                        <td>{item.categories && item.categories.length > 0 && item.categories.map(item => item.name).join(', ')}</td>
+                                                        <td>{item.base_price}</td>
+                                                        <td>{item.is_active ? "Mở": "Đóng"}</td>
+                                                        <td>
+                                                            <div className="Chucnang" style={{display: 'flex', gap: '10px'}}>
+                                                                <div className="btn-sua">
+                                                                    <button 
+                                                                        className="btn btn-primary btn-sm"
+                                                                        style={{padding: '0px 10px'}}
+                                                                        name='edit'
+                                                                        onClick={(e) => this.handlUserManager(e, item)}
+                                                                    >Sửa</button>
+                                                                </div>
+                                                                <div className="btn-Xoa">
+                                                                    <button 
+                                                                        className="btn btn-primary btn-sm"
+                                                                        style={{padding: '0px 10px',backgroundColor: "red", border: "none"}}
+                                                                        name='delete'
+                                                                        onClick={(e) => this.handlUserManager(e, item)}
+                                                                    >Xóa</button>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )})) : 
+                                                (
+                                                    <tr>
+                                                        <td colSpan="5" className="text-center">Không có người dùng nào</td>
+                                                    </tr>
+                                                )
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -98,6 +179,8 @@ class ProductManager extends Component {
 const mapStateToProps = state => {
     return {
         listCategory: state.category.listCategory,
+        listProducts: state.product.listProducts,
+        
 
     };
 };
@@ -106,6 +189,7 @@ const mapDispatchToProps = dispatch => {
     return {
         getAllCategoryStart: () => dispatch(actions.getAllCategoryStart()),
         createNewProductStart: (data) => dispatch(actions.createNewProductStart(data)),
+        getAllProductStart: () => dispatch(actions.getAllProductStart()),
     };
 };
 
