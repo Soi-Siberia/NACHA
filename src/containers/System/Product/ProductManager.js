@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ModalAddNewProduct from '../Modal/ModalProduct';
+import ModalProductEdit from '../Modal/ModalProductEdit';
 import * as actions from '../../../store/actions';
 
 
@@ -9,9 +10,11 @@ class ProductManager extends Component {
         super(props);
         this.state = {
             isOpenAddNew: false,
+            isOpenEdit: false,
+            dataEditSent:'',
             listCategory: [],
-
             listProducts: [],
+
         };
     }
 
@@ -53,20 +56,50 @@ class ProductManager extends Component {
             isOpenAddNew: !this.state.isOpenAddNew
         })
     }
-
+    toggleEditProuct = ()=>{
+        this.setState({
+            isOpenEdit: !this.state.isOpenEdit
+        })
+    }
 
     // mutiselect
-    handldMutiSelect = (data) => {
+    handldMutiSelect = () => {
         // console.log('data', data)
     }
 
-
-    //add new product
+    //open Modal
     handleOpenModalAdd = ()=> {
         this.setState({
-            isOpenAddNew: true
+            isOpenAddNew: true,
         })
     }
+
+    handleOpenModalEdit = (e, data) => {
+        e.stopPropagation();
+        let action = e.target.name;
+
+        if (action === 'edit') {
+            let categoryEdit = this.buildDataInputSelect(data.categories);
+            let dataEditDone = {
+                ...data,
+                categories: categoryEdit
+            };
+
+            this.setState((prevState) => ({
+                isOpenEdit: !prevState.isOpenEdit,
+                dataEditSent: dataEditDone
+            }));
+        }
+
+        if (action === 'delete') {
+            let confirmDelete = window.confirm("Bạn chắc chắn xóa? Dữ liệu không thể khôi phục.");
+            if (confirmDelete) {
+                alert("Xóa thành công!");
+                // Thêm logic xóa ở đây nếu có
+            }
+        }
+    }
+
 
     //call redux create new product
     handelCreateNewProduct = (data) => {
@@ -74,10 +107,14 @@ class ProductManager extends Component {
         this.props.createNewProductStart(data);
     }
 
+    handlEditProduct = (data) =>{
+        console.log("==> data edit product: ", data)
+    }
+
 
     render() {
-        let { isOpenAddNew, listCategory, listProducts } = this.state;
-        console.log('===> listProducts', listProducts)
+        let { isOpenAddNew, listCategory, listProducts, isOpenEdit, dataEditSent} = this.state;
+        // console.log('===> listProducts', listProducts)
         return (
             <>
                 <div className='container-full'>
@@ -133,7 +170,7 @@ class ProductManager extends Component {
                                                                         className="btn btn-primary btn-sm"
                                                                         style={{padding: '0px 10px'}}
                                                                         name='edit'
-                                                                        onClick={(e) => this.handlUserManager(e, item)}
+                                                                        onClick={(e) => this.handleOpenModalEdit(e, item)}
                                                                     >Sửa</button>
                                                                 </div>
                                                                 <div className="btn-Xoa">
@@ -141,7 +178,7 @@ class ProductManager extends Component {
                                                                         className="btn btn-primary btn-sm"
                                                                         style={{padding: '0px 10px',backgroundColor: "red", border: "none"}}
                                                                         name='delete'
-                                                                        onClick={(e) => this.handlUserManager(e, item)}
+                                                                        onClick={(e) => this.handleOpenModalEdit(e, item)}
                                                                     >Xóa</button>
                                                                 </div>
                                                             </div>
@@ -171,6 +208,15 @@ class ProductManager extends Component {
                     listCategory={listCategory}
                 />
 
+                <ModalProductEdit
+                    isOpenEdit={isOpenEdit}
+                    toggleEditProuct = {this.toggleEditProuct}
+                    listCategory={listCategory}
+                    dataEdit = {dataEditSent}
+                    dataEditProduct = {this.handlEditProduct}
+                />
+
+
             </>
         );
     }
@@ -180,8 +226,6 @@ const mapStateToProps = state => {
     return {
         listCategory: state.category.listCategory,
         listProducts: state.product.listProducts,
-        
-
     };
 };
 

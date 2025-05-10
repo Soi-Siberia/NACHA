@@ -18,7 +18,7 @@ class ModalCategoryEdit extends Component {
     componentDidUpdate(prevProps, prevState) {
         if(prevProps.dataEditCategory !== this.props.dataEditCategory && this.props.dataEditCategory) {
             let data = this.props.dataEditCategory
-            console.log("dataEditCategory: ", data)
+            // console.log("dataEditCategory: ", data)
             this.setState({
                 id: data.id,
                 name: data.name,
