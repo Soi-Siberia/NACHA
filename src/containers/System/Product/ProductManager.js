@@ -14,6 +14,19 @@ class ProductManager extends Component {
             dataEditSent:'',
             listCategory: [],
             listProducts: [],
+            listSize:[],
+
+            products: [{
+                name: 'Trà Sữa',
+                sizes: [
+                    { size: 'Nhỏ', price: 15000 },
+                    { size: 'Vừa', price: 20000 },
+                    { size: 'Lớn', price: 35000 }
+                ],
+                category: 'Trà Sữa',
+                functions: ['Xóa', 'Sữa']}
+            ]
+
 
         };
     }
@@ -21,6 +34,7 @@ class ProductManager extends Component {
     componentDidMount() {
         this.props.getAllCategoryStart();
         this.props.getAllProductStart();
+        this.props.getallcodeSizeProductStart();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -36,6 +50,11 @@ class ProductManager extends Component {
             // console.log('listProducts', this.props.listProducts)
             this.setState({
                 listProducts: this.props.listProducts
+            })
+        }
+        if(prevProps.listSize !== this.props.listSize){
+            this.setState({
+                listSize: this.props.listSize
             })
         }
     }
@@ -74,47 +93,40 @@ class ProductManager extends Component {
         })
     }
 
-    handleOpenModalEdit = (e, data) => {
-        e.stopPropagation();
-        let action = e.target.name;
-
-        if (action === 'edit') {
-            let categoryEdit = this.buildDataInputSelect(data.categories);
-            let dataEditDone = {
-                ...data,
-                categories: categoryEdit
-            };
-
-            this.setState((prevState) => ({
-                isOpenEdit: !prevState.isOpenEdit,
-                dataEditSent: dataEditDone
-            }));
-        }
-
-        if (action === 'delete') {
-            let confirmDelete = window.confirm("Bạn chắc chắn xóa? Dữ liệu không thể khôi phục.");
-            if (confirmDelete) {
-                alert("Xóa thành công!");
-                // Thêm logic xóa ở đây nếu có
-            }
-        }
-    }
-
-
     //call redux create new product
     handelCreateNewProduct = (data) => {
-        // console.log('===> data chill sent', data)
+        // console.log('===> handelCreateNewProduct', data)
         this.props.createNewProductStart(data);
-    }
+    }   
 
     handlEditProduct = (data) =>{
-        console.log("==> data edit product: ", data)
+        // console.log("==> data edit product done: ", data)
+        this.props.updateProductStart(data)
+    }
+    handlOnchangButon = (e, data) =>{
+        if(e.target.name === 'edit')
+        {
+            this.setState({
+                isOpenEdit: true,
+                dataEditSent: data
+            })
+        }else{
+            if(e.target.name === 'delete')
+            {
+                let confimDelte = window.confirm("Chắc chắn xóa!!! Dữ liệu không thể khôi phục")
+                if(confimDelte)
+                {
+                    this.props.delteteProductStart(data.id)
+                }
+            }
+        }
     }
 
 
     render() {
         let { isOpenAddNew, listCategory, listProducts, isOpenEdit, dataEditSent} = this.state;
         // console.log('===> listProducts', listProducts)
+        
         return (
             <>
                 <div className='container-full'>
@@ -124,75 +136,70 @@ class ProductManager extends Component {
                                 <div className='product-manage__title text-center mb-4'>
                                     Quản Lý Sản Phẩm
                                 </div>
-                                <div className='product-manage-add-new' style={{ textAlign: 'center' }}>
+                                <div className='product-manage-add-new mb-5' style={{ textAlign: 'center' }}>
                                     <button className='btn btn-primary' onClick={()=> this.handleOpenModalAdd()}>Thêm mới sản phẩm</button>
                                 </div>
 
                                 <div className="table-responsive">
-                                    <table className="table table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">STT</th>
-                                                <th scope="col">Tên Sản Phẩm</th>
-                                                <th scope="col">Hình ảnh</th>
-                                                <th scope="col">Mô tả</th>
-                                                <th scope="col">Danh Mục</th>
-                                                <th scope="col">Giá</th>
-                                                <th scope="col">Trạng thái</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                listProducts && listProducts.length>0 ? (
-                                                listProducts.map((item, index) => {
-                                                return (
-                                                    <tr className='table-data'
-                                                        style={{verticalAlign:'baseline'}} 
-                                                        key={index}>
-                                                        <th scope="row">{index+1}</th>
-                                                        <td>{item.name}</td>
-                                                        <td>
-                                                            {item.imgBlod && item.imgBlod.length > 50 ? (
-                                                                <img src={item.imgBlod} alt="item" style={{width: '80px', height: '80px'}} />
-                                                            ) : (
-                                                                <span>Chưa úp ảnh</span>
-                                                            )}
-                                                        </td>
-                                                        <td>{item.description}</td>
-                                                        <td>{item.categories && item.categories.length > 0 && item.categories.map(item => item.name).join(', ')}</td>
-                                                        <td>{item.base_price}</td>
-                                                        <td>{item.is_active ? "Mở": "Đóng"}</td>
-                                                        <td>
-                                                            <div className="Chucnang" style={{display: 'flex', gap: '10px'}}>
-                                                                <div className="btn-sua">
-                                                                    <button 
-                                                                        className="btn btn-primary btn-sm"
-                                                                        style={{padding: '0px 10px'}}
-                                                                        name='edit'
-                                                                        onClick={(e) => this.handleOpenModalEdit(e, item)}
-                                                                    >Sửa</button>
-                                                                </div>
-                                                                <div className="btn-Xoa">
-                                                                    <button 
-                                                                        className="btn btn-primary btn-sm"
-                                                                        style={{padding: '0px 10px',backgroundColor: "red", border: "none"}}
-                                                                        name='delete'
-                                                                        onClick={(e) => this.handleOpenModalEdit(e, item)}
-                                                                    >Xóa</button>
-                                                                </div>
+                                    <table className="table table-bordered">
+                                    <thead className="thead-light">
+                                        <tr style={{textAlign:"center", verticalAlign:'middle', backgroundColor:'#0071BA', color:"white"}}>
+                                        <th>Sản Phẩm</th>
+                                        <th>Size</th>
+                                        <th>Giá</th>
+                                        <th>Danh Mục</th>
+                                        <th>Chức Năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {listProducts.map((product, productIndex) =>
+                                        product.allcodes.map((s, sizeIndex) => (
+                                            <tr key={`${productIndex}-${sizeIndex}`} style={{textAlign: 'center', verticalAlign:'middle'}}>
+                                                {sizeIndex === 0 && (
+                                                    <td rowSpan={product.allcodes.length}>
+                                                        <div className='conten-table' style={{display:'flex', alignItems:'center', justifyContent: 'space-around'}}>
+                                                                {product.imgBlod && product.imgBlod.length > 50 ? (
+                                                                <img src={product.imgBlod} alt="item" style={{width: '80px', height: '80px'}} />
+                                                                    ) : (
+                                                                        <span>Chưa úp ảnh</span>
+                                                                    )}
+                                                                <span>{product.name}</span>
+                                                        </div>                                                    
+                                                    </td>
+                                                )}
+                                                <td>{s.name}</td>
+                                                <td>{s.product_allcode.price}</td>
+                                                {sizeIndex === 0 && (
+                                                    <>
+                                                    <td rowSpan={product.allcodes.length}>{product.categories.map(option => option.name).join(', ')}</td>
+                                                    <td rowSpan={product.allcodes.length}>
+                                                        <div className="Chucnang"
+                                                            style={{display:'flex', alignItems:'center', justifyContent:"space-around"}}    
+                                                        >
+                                                            <div className="btn-sua">
+                                                                <button
+                                                                    style={{padding:'0px 10px'}}
+                                                                    className="btn btn-primary"
+                                                                    name='edit'
+                                                                    onClick={(e) => this.handlOnchangButon(e, product)}
+                                                                >Sửa</button>
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                )})) : 
-                                                (
-                                                    <tr>
-                                                        <td colSpan="5" className="text-center">Không có người dùng nào</td>
-                                                    </tr>
-                                                )
-                                            }
-
-                                        </tbody>
+                                                            <div className="btn-Xoa">
+                                                                <button 
+                                                                    className="btn btn-primary"
+                                                                    style={{backgroundColor: "red", border: "none", padding:'0px 10px'}}
+                                                                    name='delete'
+                                                                    onClick={(e) => this.handlOnchangButon(e, product)}
+                                                                >Xóa</button>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    </>
+                                                )}
+                                            </tr>
+                                        ))
+                                        )}
+                                    </tbody>
                                     </table>
                                 </div>
 
@@ -206,6 +213,7 @@ class ProductManager extends Component {
                     toggleNewProuct={this.toggleNewProuct}
                     dataNewProduct={this.handelCreateNewProduct}
                     listCategory={listCategory}
+                    listSize = {this.state.listSize}
                 />
 
                 <ModalProductEdit
@@ -214,6 +222,7 @@ class ProductManager extends Component {
                     listCategory={listCategory}
                     dataEdit = {dataEditSent}
                     dataEditProduct = {this.handlEditProduct}
+                    listSize= {this.state.listSize}
                 />
 
 
@@ -226,6 +235,7 @@ const mapStateToProps = state => {
     return {
         listCategory: state.category.listCategory,
         listProducts: state.product.listProducts,
+        listSize: state.product.listSize,
     };
 };
 
@@ -234,6 +244,9 @@ const mapDispatchToProps = dispatch => {
         getAllCategoryStart: () => dispatch(actions.getAllCategoryStart()),
         createNewProductStart: (data) => dispatch(actions.createNewProductStart(data)),
         getAllProductStart: () => dispatch(actions.getAllProductStart()),
+        delteteProductStart: (id)=> dispatch(actions.delteteProductStart(id)),
+        getallcodeSizeProductStart:() => dispatch(actions.getallcodeSizeProductStart()),
+        updateProductStart:(data) => dispatch(actions.updateProductStart(data))
     };
 };
 

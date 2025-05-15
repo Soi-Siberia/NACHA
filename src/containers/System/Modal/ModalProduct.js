@@ -9,13 +9,26 @@ class ModalProduct extends Component {
         this.state ={
             name: '',
             description: '',
-            price: '',
             imgBlod: '',
             is_active: true,
             categorySelected: "",
             categoryId:[],
+            priceSize:[]
         }
     }
+
+    setStateDefault = ()=>{
+        this.setState({
+            name: '',
+            description: '',
+            imgBlod: '',
+            is_active: true,
+            categorySelected: "",
+            categoryId:[],
+            priceSize:[]
+        })
+    }
+
 
     //close modal
     toggle = () => {
@@ -34,18 +47,34 @@ class ModalProduct extends Component {
     };
 
     //onchang input
-    handleOnChange = (e) => {
+    handleOnChange = (e, data) => {
         let newValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-        // console.log("name: ", e.target.name, "value: ", newValue)
+        // console.log("name: ", e.target.name, "value: ", newValue, "data: ", data)
+        if(e.target.name === "priceSize"){
+            let dataNew = {id: data.id, price: e.target.value}
+            console.log("==> dataNew", dataNew)
+            this.setState(prevState => {
+                let exists = prevState.priceSize.some(item => item.id === dataNew.id);
+                let updatedPriceSize = exists
+                ? prevState.priceSize.map(item =>
+                    item.id === dataNew.id ? dataNew : item
+                )
+                : [...prevState.priceSize, dataNew];
+
+            return { priceSize: updatedPriceSize };
+            })
+        }else {
         this.setState({
             [e.target.name]: newValue
-        })
+        })}
     }
     // add new product
-    handlCreateNewProduct = (data) => {
+    handlCreateNewProduct = () => {
         let copyState = { ...this.state };
         delete copyState.optionSelcted;
         this.props.dataNewProduct(copyState)
+        this.toggle()
+        this.setStateDefault()
     }
 
 
@@ -58,8 +87,9 @@ class ModalProduct extends Component {
     }
 
   render() {    
-    let {name, description, is_active, imgBlod, price, categorySelected} = this.state;
-    let {listCategory, isOpenAdd} = this.props;
+    let {name, description, is_active, imgBlod, categorySelected} = this.state;
+    let {listCategory, isOpenAdd, listSize} = this.props;
+    // console.log('==> chill priceSize: ', listSize)
     return (
         <Modal 
             isOpen = {isOpenAdd}
@@ -68,7 +98,7 @@ class ModalProduct extends Component {
         >
           <ModalHeader toggle={this.toggle}>Thêm mới sản phẩm</ModalHeader>
           <ModalBody>
-          <div className="Modal-product container">
+                <div className="Modal-product container">
                     <div className="row row-modal-product">
                         <div className="col-md-6 mb-3">
                             <div className="Modal-product__form-group">
@@ -109,20 +139,6 @@ class ModalProduct extends Component {
                             </div>
                         </div>
                         <div className="col-md-6 mb-3">
-                            <div className="Modal-product__form-group">
-                                <label htmlFor="price">Giá Sản Phẩm</label>
-                                <input
-                                    type="text"
-                                    name="price"
-                                    className="form-control"
-                                    placeholder="Giá"
-                                    value={price}
-                                    onChange={(e)=> this.handleOnChange(e)}
-
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
                             <label htmlFor="image">Hình ảnh sản phẩm</label>
                             <div style={{ display: 'flex', alignItems: 'center'}}>
                                 <input type="file" accept="image/*" onChange={this.handleImageChange} />
@@ -147,6 +163,54 @@ class ModalProduct extends Component {
                                     {is_active ? 'Hiển thị danh mục' : 'Không hiển thị danh mục'}
                                 </label>
                             </div>
+                        </div>
+                        <div className='col-md-12 mb-3'>
+                            <label className='product-size'>Size sản phẩm</label>
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th scope='col'>Size</th>
+                                        <th scope='col'>Giá</th>
+                                        <th scope='col'>Mô tả</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        listSize && listSize.map((option, index) => (
+                                            <tr key={index} style={{verticalAlign:'baseline'}}>
+                                                <td>
+                                                    {
+                                                        option.name
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <div className="price-product__form-group">
+                                                        <input
+                                                            style={{padding: '10px'}}
+                                                            type="text"
+                                                            name="priceSize"
+                                                            className="form-control"
+                                                            placeholder="Giá"
+                                                            onChange={(e)=> this.handleOnChange(e, option)}
+                                                        />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    {
+                                                        option.description
+                                                    }
+                                                </td>
+                                            </tr>
+                                        ))
+                                    }
+
+                                </tbody>
+                            </table>
+                                {/* <Button
+                                    className='mt-3' 
+                                    style={{padding:'0px 10px', background:'#0B5ED7'}}>
+                                    Thêm Mới Size </Button> 
+                                */}
                         </div>
                     </div>
                 </div>

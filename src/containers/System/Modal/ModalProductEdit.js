@@ -6,13 +6,15 @@ class ModalProductEdit extends Component {
     constructor(props){
         super(props);
         this.state ={
+            idproduct:'',
             name: '',
             description: '',
-            price: '',
             imgBlod: '',
             is_active: true,
             categorySelected: "",
             categoryId:[],
+            listSizePrice: [],
+            priceSizeEdit: [],
         }
     }
 
@@ -21,16 +23,46 @@ class ModalProductEdit extends Component {
     {
         if(prevProps.dataEdit !== this.props.dataEdit)
         {
-            let{name, description, base_price, imgBlod, is_active, categories} = this.props.dataEdit
+            let{id, name,description, base_price, imgBlod, is_active, categories, allcodes} = this.props.dataEdit
+            let builSelectMuti = categories.map(item => ({
+                id: item.id,
+                label: item.name
+            }))
+            console.log("==> data dataEdit: ",this.props.dataEdit)
+
+            let sizePrice = allcodes.map(item => ({
+                id: item.id,
+                price: item.product_allcode.price
+            }))
+            // console.log("==> data edit: ", sizePrice)
+
             this.setState({
+                id: id,
                 name: name,
                 description: description,
                 price: base_price,
                 imgBlod: imgBlod,
                 is_active: is_active,
-                categorySelected: categories,
+                categorySelected: builSelectMuti,
+                listSizePrice: allcodes,
+                priceSizeEdit: sizePrice
+
             })
         }
+    }
+
+    defaulState = () =>{
+        this.setState({
+            idproduct:'',
+            name: '',
+            description: '',
+            imgBlod: '',
+            is_active: true,
+            categorySelected: "",
+            categoryId:[],
+            listSizePrice: [],
+            priceSizeEdit: [],
+        })
     }
 
     //close modal
@@ -50,19 +82,38 @@ class ModalProductEdit extends Component {
     };
 
     //onchang input
-    handleOnChange = (e) => {
-        let newValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-        // console.log("name: ", e.target.name, "value: ", newValue)
+    handleOnChange = (e, data) => {
+         let newValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        console.log("name: ", e.target.name, "value: ", newValue, "data: ","data theo", data, "ID Size: ", data)
+        if(e.target.name === "priceSize"){
+            let dataNew = {id: data, price: e.target.value}
+            console.log("==> dataNew done", dataNew)
+            this.setState(prevState => {
+                let exists = prevState.priceSizeEdit.some(item => item.id === dataNew.id);
+                let updatedPriceSize = exists
+                ? prevState.priceSizeEdit.map(item =>
+                    item.id === dataNew.id ? dataNew : item
+                )
+                : [...prevState.priceSizeEdit, dataNew];
+
+            return { priceSizeEdit: updatedPriceSize };
+            })
+        }else {
         this.setState({
             [e.target.name]: newValue
-        })
+        })}
     }
     // add new product
     handlEditProduct = () => {
-        let copyState = { ...this.state };
+        let copyState = { ...this.state }
+
+        copyState.priceSizeEdit = copyState.priceSizeEdit.filter(item => item.price !== "" && item.price !== null);
         delete copyState.optionSelcted;
         delete copyState.categorySelected;
+        delete copyState.listSizePrice;
         this.props.dataEditProduct(copyState)
+        this.defaulState()
+        this.toggle()
     }
 
     // onchang mutiselect
@@ -76,9 +127,9 @@ class ModalProductEdit extends Component {
 
 
   render() {    
-    let {name, description, is_active, imgBlod, price, categorySelected} = this.state;
-    let {listCategory, isOpenEdit} = this.props;
-    // console.log("==> Data product Edit: ", dataEdit)
+    let {name, description, is_active, imgBlod, categorySelected, listSizePrice} = this.state;
+    let {listCategory, isOpenEdit,listSize} = this.props;
+    // console.log("===> listSizePrice: ", listSizePrice)
     return (
         <Modal 
             isOpen = {isOpenEdit}
@@ -87,7 +138,7 @@ class ModalProductEdit extends Component {
         >
           <ModalHeader toggle={this.toggle}>Chỉnh sửa sản phẩm</ModalHeader>
           <ModalBody>
-          <div className="Modal-product container">
+            <div className="Modal-product container">
                     <div className="row row-modal-product">
                         <div className="col-md-6 mb-3">
                             <div className="Modal-product__form-group">
@@ -116,7 +167,9 @@ class ModalProductEdit extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="col-md-6 mb-3">
+                        <div className="col-md-6 mb-3"
+                            style={{display:"flex", alignItems:"center"}}
+                        >
                             <div className="Modal-product__form-group">
                                 <label htmlFor="category">Danh Mục</label>
                                 <MutiSelect
@@ -124,20 +177,6 @@ class ModalProductEdit extends Component {
                                     value={categorySelected}
                                     options={listCategory}
                                     senData = {this.handldMutiSelect}  
-                                />
-                            </div>
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <div className="Modal-product__form-group">
-                                <label htmlFor="price">Giá Sản Phẩm</label>
-                                <input
-                                    type="text"
-                                    name="price"
-                                    className="form-control"
-                                    placeholder="Giá"
-                                    value={price}
-                                    onChange={(e)=> this.handleOnChange(e)}
-
                                 />
                             </div>
                         </div>
@@ -167,8 +206,57 @@ class ModalProductEdit extends Component {
                                 </label>
                             </div>
                         </div>
+                        {/* --------------------------------------------- */}
+                        <div className='col-md-12 mb-3'>
+                            <label className='product-size'>Size sản phẩm</label>
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th scope='col'style={{width: '30%'}}>Size</th>
+                                        <th scope='col'>Giá</th>
+                                        <th scope='col' style={{width: '40%'}}>Mô tả</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        listSize && listSize.map((listSizeItem, index) => {
+                                        
+                                            let option = listSizePrice.find(p => p.id === listSizeItem.id)
+                                            return(
+                                                <tr key={index} style={{verticalAlign:'baseline'}}>
+                                                    <td>
+                                                        {
+                                                            listSizeItem.name
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <div className="price-product__form-group">
+                                                            <input
+                                                                style={{padding: '10px'}}
+                                                                defaultValue={option?.product_allcode?.price || ""}
+                                                                type="text"
+                                                                name="priceSize"
+                                                                className="form-control"
+                                                                placeholder="Giá"
+                                                                onChange={(e)=> this.handleOnChange(e,listSizeItem.id)}
+                                                            />
+                                                        </div>
+                                                    </td>
+                                                    <td >
+                                                        {
+                                                            listSizeItem.description
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>                        
                     </div>
-                </div>
+            </div>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" style={{padding:'0px 10px'}} onClick={() => this.handlEditProduct()}>

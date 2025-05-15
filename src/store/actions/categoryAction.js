@@ -11,6 +11,7 @@ export const createNewCategoryStart = (data) => {
             {
                 toast.success("Thêm mới danh mục thành công")
                 dispatch(createNewCategorySuccess())
+                dispatch(getAllCategoryStart())
             }else{
                 toast.error(`Lỗi: ${res.message}`)
                 dispatch(createNewCategoryFaild())
