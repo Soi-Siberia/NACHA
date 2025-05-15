@@ -148,6 +148,7 @@ class ProductManager extends Component {
                                         <th>Size</th>
                                         <th>Giá</th>
                                         <th>Danh Mục</th>
+                                        <th>Mô Tả</th>
                                         <th>Chức Năng</th>
                                         </tr>
                                     </thead>
@@ -163,15 +164,16 @@ class ProductManager extends Component {
                                                                     ) : (
                                                                         <span>Chưa úp ảnh</span>
                                                                     )}
-                                                                <span>{product.name}</span>
+                                                                <span style={{flex: '1'}} >{product.name}</span>
                                                         </div>                                                    
                                                     </td>
                                                 )}
-                                                <td>{s.name}</td>
+                                                <td >{s.name}</td>
                                                 <td>{s.product_allcode.price}</td>
                                                 {sizeIndex === 0 && (
                                                     <>
-                                                    <td rowSpan={product.allcodes.length}>{product.categories.map(option => option.name).join(', ')}</td>
+                                                    <td rowSpan={product.allcodes.length} style={{width:'25%'}}>{product.categories.map(option => option.name).join(', ')}</td>
+                                                    <td style={{width:'25%'}} rowSpan={product.allcodes.length}>{product.description}</td>
                                                     <td rowSpan={product.allcodes.length}>
                                                         <div className="Chucnang"
                                                             style={{display:'flex', alignItems:'center', justifyContent:"space-around"}}    

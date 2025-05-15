@@ -114,6 +114,7 @@ export const updateProductStart = (data) => {
             {
                 toast.success(res.message)
                 dispatch(updateProductSuccess())
+                dispatch(getAllProductStart())
             }else {
                 toast.error(`Lỗi: ${res.message}`)
             }

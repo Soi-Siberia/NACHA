@@ -45,19 +45,27 @@
                   opacity: 1;
                   transform: translateY(0) scale(1); /* Hiển thị phần tử và phóng to lên */
                 }
-                // border: 1px solid yellow;
-                img{
-                    border: 1px solid green;
-                    width: 100%;
-                    height: auto;
-                    padding: 5px;
+                .product-item-img{
+                    // border: 1px solid red;
+                    height: 350px;
+
+                    img{
+                        border-radius: 10px;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover; /* hoặc "contain" tùy mục đích */
                 }
+
+                }
+                
             }
             .product-item-name{
                 a{
                     text-decoration: none;
                     color: #BE1E4C;
-                    font-size: 19px;
+                    font-weight: 700;
+                    font-style: italic;
+                    font-size: 20px;
                 }
             }
             .product-item-mota{

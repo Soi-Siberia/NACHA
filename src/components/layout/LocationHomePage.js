@@ -30,7 +30,6 @@ class LocationHomePage extends Component {
   render() {
         // Sample data - replace with your actual data
         const provinces = [
-            { id: '1', name: 'Hà Nội' },
             { id: '2', name: 'Hồ Chí Minh' },
             { id: '3', name: 'Đà Nẵng' }
         ];
