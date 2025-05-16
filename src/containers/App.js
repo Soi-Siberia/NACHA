@@ -16,7 +16,7 @@ import System from '../routes/System';
 //views 
 import HomePage from '../views/homePage';
 import Category from '../routes/Category';
-import Product  from '../routes/Product';
+import Product  from '../views/Product/Product';
 
 //cuộn chuột
 import CustomScrollbars from '../components/CustomScrollbars';
@@ -54,10 +54,12 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                    <Route path={'/category/'} component={userIsAuthenticated(Category)} />
-                                    <Route path={'/product/'} component={userIsAuthenticated(Product)} />
-                                    {/*client*/}
+                                    
+                                 {/*client*/}
+                                    <Route path={'/category/'} component={(Category)} />
+                                    <Route path={'/product/'} component={(Product)} />
                                     <Route path={path.HomePage} component={(HomePage)} />
+                                    {/* <Route path={'/sanPham/'} component= */}
                                 </Switch>
                             </CustomScrollbars>
                         </span>

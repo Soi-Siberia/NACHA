@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import "./menuheader.scss";
 // import { FormattedMessage } from "react-intl";
@@ -8,18 +8,47 @@ import "./menuheader.scss";
 
 class menuheader extends Component {
 
+
+
+  handlLinkMenu = (name)=>{
+    console.log("Name 2", name)
+
+    if(name === "product")
+    {
+      this.props.history.push('/product')
+  
+    }else {
+      if(name === "homepage")
+      {
+        this.props.history.push('/homepage')
+      }
+    }
+  }
   render() {
     return (
       // console.log("this props: ", this.props.language),
       <React.Fragment>
         <nav className="navbar">
           <ul className="nav-links">
-            <li className="active">TRANG CHỦ</li>
-            <li>GIỚI THIỆU</li>
-            <li>MENU</li>
-            <li>SẢN PHẨM</li>
-            <li>CỬA HÀNG</li>
-            <li>LIÊN HỆ</li>
+            <li className="active"
+                onClick={()=>this.handlLinkMenu('homepage')}
+            >TRANG CHỦ</li>
+            <li
+              onClick={()=>this.handlLinkMenu('giothieu')}
+            >GIỚI THIỆU</li>
+            <li
+              onClick={()=>this.handlLinkMenu('menu')}
+            >MENU</li>
+            <li 
+              onClick={()=>this.handlLinkMenu('product')}
+              name='product'>SẢN PHẨM
+              </li>
+            <li 
+              onClick={()=>this.handlLinkMenu('store')}
+            >CỬA HÀNG</li>
+            <li
+              onClick={()=>this.handlLinkMenu('infor')}
+            >LIÊN HỆ</li>
             <li className="flag">
               <img src="https://flagcdn.com/w40/gb.png" alt="English" />
             </li>
@@ -44,4 +73,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(menuheader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(menuheader));

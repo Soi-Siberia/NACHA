@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {withRouter} from "react-router-dom";
 import * as action from "../../store/actions";
 import "./Product.scss";
 import product_img from "../../assets/product_img/Trà-Sữa-Phô-Mai-Nhung-Lụa-v2-550x550.png";
@@ -33,6 +34,11 @@ class Product extends Component {
         observer.observe(item);
       });
     }
+  }
+
+  //xử lý xem thêm redairact page product
+  handleProdcut = () =>{
+    this.props.history.push('/product')
   }
 
   render() {
@@ -75,7 +81,10 @@ class Product extends Component {
           </div>
 
           <div className="product-button">
-            <button className="btn-xemthem-product">xem thêm</button>
+            <button 
+              className="btn-xemthem-product"
+              onClick={()=>this.handleProdcut()}>xem thêm
+            </button>
           </div>
         </div>
       </div>
@@ -95,4 +104,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Product));

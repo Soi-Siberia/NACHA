@@ -21,15 +21,15 @@ export const adminMenu = [
         ]
     },
 
-    { //systeam quản lý người dùng
+    { //systeam quản lý category
         name: 'menu.system.system-category.header', menus: [
-            { name: 'menu.system.system-category.manage-category', link: '/category/manage-category' },
+            { name: 'menu.system.system-category.manage-category', link: '/system/manage-category' },
         ]
     },
 
-    { //systeam quản lý người dùng
+    { //systeam quản lý nproduct
         name: 'menu.system.system-product.header', menus: [
-            { name: 'menu.system.system-product.manage-product', link: '/product/manage-product' },
+            { name: 'menu.system.system-product.manage-product', link: '/system/product-manage' },
         ]
     },
 ];
