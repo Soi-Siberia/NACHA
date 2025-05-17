@@ -17,7 +17,8 @@ class Product extends Component {
         this.state = {
             categories:[],
             listProduct: [],
-            filter: 'All Products',
+            idSearch: "all",
+            searchKeyword: "",
         };
     }
 
@@ -39,17 +40,44 @@ class Product extends Component {
 
         if(prevProps.listCategory !== this.props.listCategory)
         {
-            console.log("==> list listCategory", this.props.listCategory)
+            // console.log("==> list listCategory", this.props.listCategory)
             this.setState({
                 categories: this.props.listCategory
             })
         }
     }
 
+    //sử lý seach category
+    handleSearchCategory = (key) =>{
+        // console.log("Search Category: ", key)
+        if(key === 'all'){
+            this.setState({
+                idSearch: key
+            })
+        }else{
+            this.setState({
+                idSearch: key.id
+            })
+        }
+    }
+    // search keyword
+    handleOnchangKeySearch=(e)=>{
+        console.log(e.target.value)
+        this.setState({
+            searchKeyword: e.target.value
+        })
+    }
+
 
     render() {
-        let listProduct = this.state.listProduct
-        console.log("==> products: ", listProduct)
+        let listProducts = this.state.listProduct
+        // console.log("==> listProduct", listProduct)
+        let idSearch = this.state.idSearch
+
+        let listProductCategory = idSearch === "all" ? listProducts: listProducts.filter(product => product.categories.some(cate => cate.id === idSearch))
+
+        let listProduct = listProductCategory.filter(product => product.name.toLowerCase().includes(this.state.searchKeyword.toLowerCase()))
+        console.log("list product key word: ", Product)
         return (
             <React.Fragment>
                 <Menu />
@@ -58,13 +86,10 @@ class Product extends Component {
                         <div className='product-title'>
                             <h1 className="title">HOT HOT SẢN PHẢM NACHA</h1>
                             <div className="filter-bar">
-                                <select className="filter-select">
-                                    <option value="all">Filter</option>
-                                </select>
-                                <select className="filter-select">
-                                    <option value="all">All Products</option>
-                                </select>
-                                <input className="search-input" placeholder="Search..." />
+                                <input 
+                                    className="search-input" 
+                                    placeholder="Tìm nhanh món mình thích thích thích...." 
+                                    onChange={(e)=> this.handleOnchangKeySearch(e)}/>
                             </div>
                         </div>
 
@@ -72,8 +97,14 @@ class Product extends Component {
                             <div className='product-right stikySidebar'>
                                 <h2>Danh sách thể loại</h2>
                                 <ul className="category-list">
+                                    <li
+                                        className={idSearch === 'all' ? "category-item active" : "category-item"}
+                                        onClick={()=>this.handleSearchCategory("all")}>Tất Cả
+                                    </li>
                                     {this.state.categories.map((item, index) => (
-                                        <li key={index} className="category-item">{item.name}</li>
+                                        <li key={index} 
+                                            className={idSearch === item.id ? "category-item active":"category-item"}
+                                            onClick={()=>this.handleSearchCategory(item)}>{item.name}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -81,6 +112,7 @@ class Product extends Component {
                                 <div className="product-grid">
                                     {
                                         listProduct && listProduct.map((product, index) => {
+                                            // console.log("==> product: ", product)
                                             let price = product.allcodes.map(price => price.product_allcode.price)
                                             // console.log("==> price: ", price)
                                             let minPrice = Math.min(...price)

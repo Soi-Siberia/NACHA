@@ -57,7 +57,7 @@ class Product extends Component {
 
           <div className="product-list row">
             {listProducts &&
-              listProducts.map((item, index) => {
+              listProducts.slice(0, 8).map((item, index) => {
                 return (
                   <div
                     className="product-item col-12 col-sm-6 col-md-4 col-lg-3"
