@@ -8,6 +8,7 @@ $btn-color: #ffffff;
   background-color: $product-bg;
   font-family: 'Segoe UI', sans-serif;
   color: $text-color;
+  padding-top: 100px;
 
   .product-container{
     padding-bottom: 30px;
@@ -50,7 +51,7 @@ $btn-color: #ffffff;
       
       .stikySidebar{
         width: 25%;
-        top:30px;
+        top:60px;
         position: sticky;
         // border: 1px solid red;
 

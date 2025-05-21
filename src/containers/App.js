@@ -5,7 +5,7 @@ import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
-
+import '../containers/App.scss'
 import { path } from '../utils'
 
 import Home from '../routes/Home';
@@ -17,39 +17,32 @@ import System from '../routes/System';
 import HomePage from '../views/homePage';
 import Category from '../routes/Category';
 import Product  from '../views/Product/Product';
-
+import DetailProduct from '../views/Product/DetailProduct';
+import About from '../views/About/about'
 //cuộn chuột
-import CustomScrollbars from '../components/CustomScrollbars';
-
+// import CustomScrollbars from '../components/CustomScrollbars';
 
 class App extends Component {
-
-    handlePersistorState = () => {
-        const { persistor } = this.props;
-        let { bootstrapped } = persistor.getState();
-        if (bootstrapped) {
-            if (this.props.onBeforeLift) {
-                Promise.resolve(this.props.onBeforeLift())
-                    .then(() => this.setState({ bootstrapped: true }))
-                    .catch(() => this.setState({ bootstrapped: true }));
-            } else {
-                this.setState({ bootstrapped: true });  
-            }
-        }
-    };
-
-    componentDidMount() {
-        this.handlePersistorState();
+  constructor(props) {
+    super(props);
+    this.state = {
+        scrollTop: 0
     }
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+  handleScroll(e) {
+    // console.log("==> Scroll Top: ", e.target.scrollTop)
+    this.setState({
+        scrollTop: e.target.scrollTop
+    })
+  }
 
     render() {
         return (
             <Fragment>
                 <Router history={history}>
-                    <div className="main-container">
-                        {/* {this.props.isLoggedIn && <Header />} */}
+                    <div className="main-container" onScroll={e => this.handleScroll(e)}>
                         <span className="content-container">
-                            <CustomScrollbars style={{height: '100vh', with: '100%'}}>
                                 <Switch>
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
@@ -57,19 +50,13 @@ class App extends Component {
                                     
                                  {/*client*/}
                                     <Route path={'/category/'} component={(Category)} />
-                                    <Route path={'/product/'} component={(Product)} />
+                                    <Route path={'/product/'} exact  component={(Product)} />
+                                    <Route path={'/product/detail/:id'} component={(DetailProduct)} />
                                     <Route path={path.HomePage} component={(HomePage)} />
+                                    <Route path={'/about/'} render = {(myProps) => <About {...myProps} scrollTop = {this.state.scrollTop}/>} />
                                     {/* <Route path={'/sanPham/'} component= */}
                                 </Switch>
-                            </CustomScrollbars>
                         </span>
-{/* 
-                        <ToastContainer
-                            className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
-                            autoClose={false} hideProgressBar={true} pauseOnHover={false}
-                            pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
-                            closeButton={<CustomToastCloseButton />}
-                        /> */}
                         <ToastContainer
                             position="top-right"
                             autoClose={2500}
@@ -81,7 +68,6 @@ class App extends Component {
                             draggable
                             pauseOnHover
                             theme="colored"
-                            // transition={Bounce}
                         />
                     </div>
                 </Router>

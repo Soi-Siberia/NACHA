@@ -4,7 +4,7 @@ import "../Product/Product.scss"
 import * as action from "../../store/actions"
 import Menu from "../../components/layout/menuheader"
 import Footer from "../../components/Footer/Footer"
-// import { Redirect, Route, Switch } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 // import RegisterPackageGroupOrAcc from '../containers/Product/RegisterPackageGroupOrAcc';
 
@@ -54,18 +54,28 @@ class Product extends Component {
             this.setState({
                 idSearch: key
             })
+
         }else{
+
             this.setState({
                 idSearch: key.id
             })
+
         }
     }
     // search keyword
     handleOnchangKeySearch=(e)=>{
-        console.log(e.target.value)
+        // console.log(e.target.value)
         this.setState({
             searchKeyword: e.target.value
         })
+    }
+
+    //detail product
+    handleDeailProduct = (e, id) =>{
+        // alert(`id prodcut: ${id}`)
+        this.props.history.push(`/product/detail/${id}`)
+
     }
 
 
@@ -77,7 +87,7 @@ class Product extends Component {
         let listProductCategory = idSearch === "all" ? listProducts: listProducts.filter(product => product.categories.some(cate => cate.id === idSearch))
 
         let listProduct = listProductCategory.filter(product => product.name.toLowerCase().includes(this.state.searchKeyword.toLowerCase()))
-        console.log("list product key word: ", Product)
+        // console.log("list product key word: ", Product)
         return (
             <React.Fragment>
                 <Menu />
@@ -118,12 +128,15 @@ class Product extends Component {
                                             let minPrice = Math.min(...price)
                                             let maxPrice = Math.max(...price)
                                             return(
-                                                <div className="product-card" key={index}>
+                                                <div className="product-card" key={index}
+                                                    onClick={(e)=>this.handleDeailProduct(e, product.id)}
+                                                    >
                                                     <img src={product.imgBlod} alt={product.name} className="product-img" />
                                                     <h3>{product.name}</h3>
                                                     <p>{`${minPrice} - ${maxPrice} đ`}</p>
-                                                <button className="add-btn">Thêm vào giỏ</button>
-                                            </div>
+
+                                                    <button className="add-btn">Thêm vào giỏ</button>
+                                                </div>
                                             )
                                         })
                                     }
@@ -153,4 +166,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Product));

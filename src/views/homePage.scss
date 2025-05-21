@@ -68,10 +68,26 @@
                         }
                     }
 
-
+                    .sub-title, .title, .underline, .content, .xemthem-btn {
+                        transform: translateY(20px);
+                        opacity: 0;
+                        animation: fadeUp 0.8s ease forwards;
+                    }
+                    .sub-title { animation-delay: 0.1s; }
+                    .title { animation-delay: 0.3s; }
+                    .underline { animation-delay: 0.5s; }
+                    .content { animation-delay: 0.7s; }
+                    .xemthem-btn { animation-delay: 0.9s; }
+                    .xemthem-btn {animation-delay: 1s;}
+                }
             }
         }
-    }
+        @keyframes fadeUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
 
     @media (max-width: 992px) {
         
@@ -116,5 +132,5 @@
 
             }
         }
-      }
+    }
 }

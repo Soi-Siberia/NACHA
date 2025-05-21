@@ -1,5 +1,5 @@
 .Product-container-full{
-    background-color: white;
+    background-color: #FDF6EE;
     .Product-container{
         // border: 1px solid red;
         height: auto;
@@ -32,7 +32,19 @@
                 margin: 11px 0px;
                 border-radius: 20px;
             }
+
+            .scroll-item {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);;
+            }
+
+            .scroll-item.show {
+            opacity: 1;
+            transform: translateY(0);
+            }
         }
+
         .product-list{
             text-align: center;
             .product-item{

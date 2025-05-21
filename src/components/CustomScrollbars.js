@@ -58,25 +58,34 @@ class CustomScrollbars extends Component {
     renderThumbVertical = (props) => <div {...props} className="thumb-vertical" />;
     renderNone = () => <div />;
 
-    render() {
-        const { className, disableVerticalScroll, disableHorizontalScroll, children, ...otherProps } = this.props;
-        return (
-            <Scrollbars
-                ref={this.ref}
-                autoHide
-                autoHideTimeout={200}
-                hideTracksWhenNotNeeded
-                className={`${className ? className + ' ' : ''}custom-scrollbar`}
-                {...otherProps}
-                renderTrackHorizontal={disableHorizontalScroll ? this.renderNone : this.renderTrackHorizontal}
-                renderTrackVertical={disableVerticalScroll ? this.renderNone : this.renderTrackVertical}
-                renderThumbHorizontal={disableHorizontalScroll ? this.renderNone : this.renderThumbHorizontal}
-                renderThumbVertical={disableVerticalScroll ? this.renderNone : this.renderThumbVertical}
-            >
-                {children}
-            </Scrollbars>
-        );
-    }
+render() {
+    const {
+        className,
+        disableVerticalScroll,
+        disableHorizontalScroll,
+        children,
+        onScrollFrame, // 👈 Thêm vào props
+        ...otherProps
+    } = this.props;
+
+    return (
+        <Scrollbars
+            ref={this.ref}
+            autoHide
+            autoHideTimeout={200}
+            hideTracksWhenNotNeeded
+            className={`${className ? className + ' ' : ''}custom-scrollbar`}
+            {...otherProps}
+            onScrollFrame={onScrollFrame} // 👈 Truyền handler scroll ra ngoài
+            renderTrackHorizontal={disableHorizontalScroll ? this.renderNone : this.renderTrackHorizontal}
+            renderTrackVertical={disableVerticalScroll ? this.renderNone : this.renderTrackVertical}
+            renderThumbHorizontal={disableHorizontalScroll ? this.renderNone : this.renderThumbHorizontal}
+            renderThumbVertical={disableVerticalScroll ? this.renderNone : this.renderThumbVertical}
+        >
+            {children}
+        </Scrollbars>
+    );
+}
 }
 
 export default CustomScrollbars;
