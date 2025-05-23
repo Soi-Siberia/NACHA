@@ -8,7 +8,7 @@ import "./about.scss"
 
 
 class about extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       offsetY: 0,
@@ -19,9 +19,9 @@ class about extends Component {
   render() {
     let scrollTop = this.props.scrollTop
     console.log("Giá trin props: ", scrollTop)
-    let { offsetY } = this.state;
+    // let { offsetY } = this.state;
 
-    return(
+    return (
       <>
         <MenuHome />
         <div
@@ -36,7 +36,7 @@ class about extends Component {
               <h1
                 className="parallax-title"
                 style={{
-                  transform: `translateY(${scrollTop * 0.3}px)`, transition: 'transform 0.1s linear',
+                  transform: `translateY(${scrollTop * 0.4}px)`, transition: 'transform 0.1s linear',
                 }}
               >
                 <span>Giới Thiệu</span>
