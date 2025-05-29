@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
+
+.Parallax-section {
+    height: 500px;
+    background-image: url("https://picsum.photos/800/400");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+    padding-top: 200px;
+
+    .Parallax-title {
+        font-family: 'Nunito';
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 100px;
+        letter-spacing: 12px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+}

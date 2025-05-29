@@ -393,7 +393,7 @@ const ModalProductEdit = (props) => {
         delete copyState.optionSelcted;
         delete copyState.categorySelected;
         delete copyState.listSizePrice;
-        console.log("==> Data edit: ", copyState)
+        // console.log("==> Data edit: ", copyState)
         props.dataEditProduct(copyState)
         defaulState()
         toggle()

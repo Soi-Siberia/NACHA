@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import NProgress from 'nprogress'
 // import config from './config';
 
 
@@ -42,6 +43,7 @@ export const isSuccessStatusCode = (s) => {
 // 4. Interceptor REQUEST (trước khi gửi request đi)
 instance.interceptors.request.use(
     (config) => {
+        NProgress.start()
         const token = getAccessToken(); // Lấy accessToken từ localStorage
 
         if (token) {
@@ -53,12 +55,14 @@ instance.interceptors.request.use(
         return config; // Trả về config đã gắn token
     },
     (error) => {
+        NProgress.done();
         return Promise.reject(error); // Nếu lỗi khi chuẩn bị request
     }
 );
 
 instance.interceptors.response.use(
     (response) => {
+        NProgress.done();
         // Thrown error for request with OK status code
         const { data } = response;
         if (data.hasOwnProperty('s') && !isSuccessStatusCode(data['s']) && data.hasOwnProperty('errmsg')) {
@@ -76,6 +80,7 @@ instance.interceptors.response.use(
         return response.data;
     },
     (error) => {
+        NProgress.done();
         const { response } = error;
         if (response == null) {
             return Promise.reject(error);

@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
+
 .about-full {
   .about-container {
+    background-color: #FDF6EE;
+
     .about-section {
       height: 500px;
       background-image: url("https://picsum.photos/800/400");
@@ -7,20 +11,51 @@
       background-position: center;
       position: relative;
       text-align: center;
-      padding-top: 250px;
+      padding-top: 200px;
+
       h1 {
-        font-family: 'Nunito', sans-serif;
+        font-family: 'Nunito';
         transform: translate(-50%, -50%);
         color: white;
-        font-size: 60px;
-        letter-spacing: 1px;
+        font-size: 100px;
+        letter-spacing: 12px;
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-        margin: 0;
       }
     }
 
-    .content-section {
-      padding: 20px;
+  }
+
+  .ablout-content {
+    padding-left: 10%;
+    font-family: 'Nunito', sans-serif;
+    height: 660px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    .about-img {
+      .img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    h1 {
+      text-align: center;
+      padding-bottom: 5%;
+      font-family: 'Nunito', sans-serif; // hoặc thử 'Baloo 2' nếu muốn bo tròn hơn
+      font-weight: 800; // hoặc bold/900 để dày rõ
+      color: #e40659; // hồng đậm giống mẫu
+      font-size: 40px; // tuỳ chỉnh
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    span {
+      line-height: 30px;
+      font-size: 16px;
     }
   }
+
 }

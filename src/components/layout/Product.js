@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import * as action from "../../store/actions";
 import "./Product.scss";
-import {observeScrollItems} from "../../utils/scrollObserverHelperUtils"
+import { observeScrollItems } from "../../utils/scrollObserverHelperUtils"
 import product_img from "../../assets/product_img/Trà-Sữa-Phô-Mai-Nhung-Lụa-v2-550x550.png";
-
+import ButonPage from "../Ui/ButonPage"
 class Product extends Component {
   componentDidMount() {
     this.props.getAllProductStart();
 
     observeScrollItems(entry => {
-      if(entry.isIntersecting){
+      if (entry.isIntersecting) {
         entry.target.classList.add('show')
       }
-      
+
     })
   }
   componentDidUpdate(prevProps) {
@@ -44,7 +44,7 @@ class Product extends Component {
   }
 
   //xử lý xem thêm redairact page product
-  handleProdcut = () =>{
+  handleProdcut = () => {
     this.props.history.push('/product')
   }
 
@@ -88,10 +88,10 @@ class Product extends Component {
           </div>
 
           <div className="product-button">
-            <button 
-              className="btn-xemthem-product"
-              onClick={()=>this.handleProdcut()}>xem thêm
-            </button>
+            <ButonPage
+              title='Xem thêm'
+              handleClick={() => this.handleProdcut()}
+            />
           </div>
         </div>
       </div>

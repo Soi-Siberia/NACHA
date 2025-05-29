@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import "./menuheader.scss";
+import logo from '../../assets/images/logo.jpg'
 // import { FormattedMessage } from "react-intl";
 
 // Cấu hình ngôn ngữ
@@ -17,19 +18,26 @@ const menuItems = [
 
 class menuheader extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state ={
-      isActive:"",
+    this.state = {
+      isActive: "",
     }
   }
 
 
   handleLinkMenu = (path) => {
-      if (this.props.location.pathname !== path) {
-        this.props.history.push(path);
-      }
+    if (this.props.location.pathname !== path) {
+      this.props.history.push(path);
     }
+  }
+
+  handleLogo = (path) => {
+    if (this.props.location.pathname !== path) {
+      this.props.history.push('/homepage')
+    }
+  }
+
   render() {
     const currentPath = this.props.location.pathname;
 
@@ -37,6 +45,11 @@ class menuheader extends Component {
       <React.Fragment>
         <div className="navbar-full">
           <nav className="navbar container">
+            <div className="logo-menu"
+              onClick={() => this.handleLogo()}
+            >
+              <img src={logo} alt="Logo" />
+            </div>
             <ul className="nav-links">
               {menuItems.map((item) => (
                 <li
@@ -57,7 +70,7 @@ class menuheader extends Component {
             </ul>
           </nav>
         </div>
-        
+
       </React.Fragment>
     );
   }

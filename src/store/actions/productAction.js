@@ -87,11 +87,11 @@ export const getallcodeSizeProductStart = () => {
             if (res && res.errCode === 0) {
                 dispatch(getallcodeSizeProductSuccess(res.data));
             } else {
-                console.log(`Lỗi: ${res.message}`)
+                // console.log(`Lỗi: ${res.message}`)
                 dispatch(getallcodeSizeProductFaild());
             }
         } catch (e) {
-            console.log(`Đã có lỗi xảy ra: ${e}`);
+            // console.log(`Đã có lỗi xảy ra: ${e}`);
             dispatch(getallcodeSizeProductFaild());
         }
     };

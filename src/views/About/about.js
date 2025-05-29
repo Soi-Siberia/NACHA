@@ -1,58 +1,54 @@
-import React, { Component } from "react";
-// import { Redirect } from 'react-router-dom';
+
 import { connect } from "react-redux"
 import MenuHome from "../../components/layout/menuheader"
 import Footer from "../../components/Footer/Footer"
 import "./about.scss"
+import img from '../../assets/images/be-nacha.jpg'
+const about = (props) => {
 
-
-
-class about extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      offsetY: 0,
-    };
-  }
-
-
-  render() {
-    let scrollTop = this.props.scrollTop
-    console.log("Giá trin props: ", scrollTop)
-    // let { offsetY } = this.state;
-
-    return (
-      <>
-        <MenuHome />
-        <div
-          className="about-full"
-          ref={this.containerRef}
-          style={{
-            paddingTop: "53px"
-          }}
-        >
-          <div className="about-container">
-            <div className="about-section">
-              <h1
-                className="parallax-title"
-                style={{
-                  transform: `translateY(${scrollTop * 0.4}px)`, transition: 'transform 0.1s linear',
-                }}
-              >
-                <span>Giới Thiệu</span>
-              </h1>
+  // console.log("==> check props: ", props)
+  let scrollTop = props.scrollTop
+  return (
+    <>
+      <MenuHome />
+      <div
+        className="about-full"
+        style={{
+          paddingTop: "53px"
+        }}
+      >
+        <div className="about-container">
+          <div className="about-section" >
+            <h1
+              className="parallax-title"
+              style={{
+                transform: `translateY(${scrollTop * 0.4}px)`, transition: 'transform 0.1s linear',
+              }}
+            >
+              <span>Giới Thiệu</span>
+            </h1>
+          </div>
+          <div className="ablout-content container">
+            <div className="about-img" >
+              <img className="img" src={img} alt="backgroud"></img>
             </div>
-            <div className="content-section">
-              <p>Cuộn xuống để thấy hiệu ứng...</p>
-              <p style={{ height: "1500px" }}></p>
+            <div className="content-info">
+              <h1>TRÀ SỮA NACHA</h1>
+              <span>Trà Sữa NACHA là một trong những thương hiệu trà sữa "top of mind" của
+                giới trẻ với những sản phẩm chất lượng, sáng tạo và giá cả hợp lý.
+                Với phương châm "Hạnh phúc trong từng lần hút", NACHA luôn không ngừng phát triển để trao tận tay khách hàng sản phẩm ngon nhất cũng như những giá trị hạnh phúc khi thưởng thức trà sữa tại NACHA.
+              </span>
             </div>
           </div>
         </div>
-        <Footer />
-      </>
-    );
-  }
+      </div>
+      <Footer />
+    </>
+  );
+
 }
+
+
 
 const mapStateToProps = (state) => {
   return {

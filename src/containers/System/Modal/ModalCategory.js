@@ -36,7 +36,7 @@ class ModalCategory extends Component {
         if (file) {
           const imagePreview = URL.createObjectURL(file);
           let converBase64 = await CommonUtils.getBase64(file)
-            console.log("converBase64 file: ", converBase64)
+            // console.log("converBase64 file: ", converBase64)
           this.setState({ imagePreview , imgBlod: converBase64 });
         }else{
             this.setState({ imagePreview: null, imgBlod: '' });
@@ -44,7 +44,7 @@ class ModalCategory extends Component {
     };
     handleOnChange = (e) => {
         let newValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-        console.log("name: ", e.target.name, "value: ", newValue)
+        // console.log("name: ", e.target.name, "value: ", newValue)
         this.setState({
             [e.target.name]: newValue
         })
