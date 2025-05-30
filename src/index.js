@@ -9,13 +9,17 @@ import '../node_modules/nprogress/nprogress.css'
 
 import { Provider } from 'react-redux';
 import reduxStore, { persistor } from './redux';
+import { history } from './redux'; // 👈 import history
+import { Router } from 'react-router-dom'; // 👈 dùng Router từ react-router-dom
 
 const renderApp = () => {
     ReactDOM.render(
         <Provider store={reduxStore}>
-            <IntlProviderWrapper>
-                <App persistor={persistor} />
-            </IntlProviderWrapper>
+            <Router history={history}>
+                <IntlProviderWrapper>
+                    <App persistor={persistor} />
+                </IntlProviderWrapper>
+            </Router>
         </Provider>,
         document.getElementById('root')
     );

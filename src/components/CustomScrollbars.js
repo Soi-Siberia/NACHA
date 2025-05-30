@@ -1,91 +1,34 @@
-import React, { Component } from 'react';
-import { Scrollbars } from 'react-custom-scrollbars'; // Dùng bản cũ
+import React, { forwardRef } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars';
 import './CustomScrollbars.scss';
 
-class CustomScrollbars extends Component {
-    ref = React.createRef();
-
-    componentDidMount() {
-        if (this.ref.current) {
-            this.ref.current.container.addEventListener("wheel", this.handleWheel, { passive: true });
-            this.ref.current.container.addEventListener("touchstart", this.handleTouchStart, { passive: true });
-        }
-    }
-
-    componentWillUnmount() {
-        if (this.ref.current) {
-            this.ref.current.container.removeEventListener("wheel", this.handleWheel);
-            this.ref.current.container.removeEventListener("touchstart", this.handleTouchStart);
-        }
-    }
-
-    handleWheel = (e) => {
-        e.stopPropagation();
-    };
-
-    handleTouchStart = (e) => {
-        // Không chặn hành vi mặc định của touchstart
-    };
-
-    getScrollLeft = () => this.ref.current?.getScrollLeft();
-    getScrollTop = () => this.ref.current?.getScrollTop();
-
-    scrollToBottom = () => {
-        if (!this.ref.current) return;
-        const targetScrollTop = this.ref.current.getScrollHeight();
-        this.scrollTo(targetScrollTop);
-    };
-
-    scrollTo = (targetTop) => {
-        if (!this.ref.current) return;
-        const scrollbars = this.ref.current;
-        const originalTop = scrollbars.getScrollTop();
-        let iteration = 0;
-
-        const scroll = () => {
-            if (iteration > 30) return;
-            iteration++;
-            scrollbars.scrollTop(originalTop + ((targetTop - originalTop) / 30) * iteration);
-            requestAnimationFrame(scroll);
-        };
-
-        scroll();
-    };
-
-    renderTrackHorizontal = (props) => <div {...props} className="track-horizontal" />;
-    renderTrackVertical = (props) => <div {...props} className="track-vertical" />;
-    renderThumbHorizontal = (props) => <div {...props} className="thumb-horizontal" />;
-    renderThumbVertical = (props) => <div {...props} className="thumb-vertical" />;
-    renderNone = () => <div />;
-
-render() {
+const CustomScrollbars = forwardRef((props, ref) => {
     const {
         className,
         disableVerticalScroll,
         disableHorizontalScroll,
         children,
-        onScrollFrame, // 👈 Thêm vào props
+        onScrollFrame,
         ...otherProps
-    } = this.props;
+    } = props;
 
     return (
         <Scrollbars
-            ref={this.ref}
+            ref={ref}  // <-- forwardRef truyền xuống đây
             autoHide
             autoHideTimeout={200}
             hideTracksWhenNotNeeded
             className={`${className ? className + ' ' : ''}custom-scrollbar`}
+            onScrollFrame={onScrollFrame}
+            renderTrackHorizontal={disableHorizontalScroll ? () => <div /> : (p) => <div {...p} className="track-horizontal" />}
+            renderTrackVertical={disableVerticalScroll ? () => <div /> : (p) => <div {...p} className="track-vertical" />}
+            renderThumbHorizontal={disableHorizontalScroll ? () => <div /> : (p) => <div {...p} className="thumb-horizontal" />}
+            renderThumbVertical={disableVerticalScroll ? () => <div /> : (p) => <div {...p} className="thumb-vertical" />}
             {...otherProps}
-            onScrollFrame={onScrollFrame} // 👈 Truyền handler scroll ra ngoài
-            renderTrackHorizontal={disableHorizontalScroll ? this.renderNone : this.renderTrackHorizontal}
-            renderTrackVertical={disableVerticalScroll ? this.renderNone : this.renderTrackVertical}
-            renderThumbHorizontal={disableHorizontalScroll ? this.renderNone : this.renderThumbHorizontal}
-            renderThumbVertical={disableVerticalScroll ? this.renderNone : this.renderThumbVertical}
         >
             {children}
         </Scrollbars>
     );
-}
-}
+});
 
 export default CustomScrollbars;
