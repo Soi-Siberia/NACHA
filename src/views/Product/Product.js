@@ -134,9 +134,9 @@ class Product extends Component {
                                                 >
                                                     <img src={product.imgBlod} alt={product.name} className="product-img" />
                                                     <h3>{product.name}</h3>
-                                                    <p>{`${minPrice} - ${maxPrice} đ`}</p>
+                                                    {/* <p>{`${minPrice} - ${maxPrice} đ`}</p> */}
 
-                                                    <button className="add-btn">Thêm vào giỏ</button>
+                                                    {/* <button className="add-btn">Thêm vào giỏ</button> */}
                                                 </div>
                                             )
                                         })

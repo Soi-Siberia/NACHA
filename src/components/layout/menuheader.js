@@ -31,13 +31,6 @@ class menuheader extends Component {
       this.props.history.push(path);
     }
   }
-
-  handleLogo = (path) => {
-    if (this.props.location.pathname !== path) {
-      this.props.history.push('/homepage')
-    }
-  }
-
   render() {
     const currentPath = this.props.location.pathname;
 
@@ -46,7 +39,7 @@ class menuheader extends Component {
         <div className="navbar-full">
           <nav className="navbar container">
             <div className="logo-menu"
-              onClick={() => this.handleLogo()}
+              onClick={() => this.handleLinkMenu('/homepage')}
             >
               <img src={logo} alt="Logo" />
             </div>
@@ -61,8 +54,10 @@ class menuheader extends Component {
                 </li>
               ))}
 
-              <li className="flag">
-                <img src="https://flagcdn.com/w40/gb.png" alt="English" />
+              <li className="flag"
+                onClick={() => this.handleLinkMenu('/cart')}
+              >
+                <i class="fas fa-shopping-cart"></i>
               </li>
               {/* <li className="separator">|</li>
               <li className="icon">🔍</li>

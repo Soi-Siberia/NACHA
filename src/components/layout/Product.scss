@@ -49,61 +49,57 @@
         }
 
         .product-list {
-            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            overflow: visible;
 
             .product-item {
-                opacity: 0;
-                transform: translateY(50px) scale(0.95);
-                /* Bắt đầu với độ mờ và scale nhỏ hơn */
-                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-                /* Tăng thời gian hiệu ứng và sử dụng easing mượt mà */
-                transition-delay: 0s;
+                border-radius: 12px;
+                padding: 1rem;
+                // background-color: #fff;
+                transition: transform 0.3s ease-in-out,
+                    box-shadow 0.3s ease-in-out;
+                will-change: transform;
 
-                /* Mặc định không có delay */
-                &.visible {
-                    opacity: 1;
-                    transform: translateY(0) scale(1);
-                    /* Hiển thị phần tử và phóng to lên */
+                &:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
                 }
 
                 .product-item-img {
-                    // border: 1px solid red;
-                    height: 400px;
-                    overflow: hidden;
-
                     img {
-                        border-radius: 10px;
                         width: 100%;
-                        height: 100%;
                         object-fit: cover;
-                        /* hoặc "contain" tùy mục đích */
-                        transition: transform 0.5s ease;
+                        border-radius: 10px;
+                        display: block;
                     }
-
-                    &:hover img {
-                        transform: scale(1.1);
-                    }
-
                 }
 
-            }
+                .product-item-name {
+                    text-align: center;
+                    margin-top: 1rem;
 
-            .product-item-name {
-                a {
-                    text-decoration: none;
-                    color: #BE1E4C;
-                    font-weight: 700;
-                    font-style: italic;
-                    font-size: 20px;
+                    a {
+                        text-decoration: none;
+                        color: #BE1E4C;
+                        font-weight: 700;
+                        font-style: italic;
+                        font-size: 20px;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+                .product-item-mota {
+                    padding: 5px;
+                    color: #666;
+                    font-weight: 400;
                 }
             }
-
-            .product-item-mota {
-                padding: 5px;
-                color: #666;
-                font-weight: 400;
-            }
-
         }
 
         .product-button {

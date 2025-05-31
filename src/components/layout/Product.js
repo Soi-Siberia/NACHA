@@ -6,42 +6,46 @@ import "./Product.scss";
 import { observeScrollItems } from "../../utils/scrollObserverHelperUtils"
 import product_img from "../../assets/product_img/Trà-Sữa-Phô-Mai-Nhung-Lụa-v2-550x550.png";
 import ButonPage from "../Ui/ButonPage"
+
+
+
+
 class Product extends Component {
   componentDidMount() {
     this.props.getAllProductStart();
 
-    observeScrollItems(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show')
-      }
+    // observeScrollItems(entry => {
+    //   if (entry.isIntersecting) {
+    //     entry.target.classList.add('show')
+    //   }
 
-    })
+    // })
   }
-  componentDidUpdate(prevProps) {
-    // Khi danh sách sản phẩm được cập nhật thì khởi động lại observer
-    if (prevProps.listProducts !== this.props.listProducts) {
-      const productItems = document.querySelectorAll(".product-item");
+  // componentDidUpdate(prevProps) {
+  //   // Khi danh sách sản phẩm được cập nhật thì khởi động lại observer
+  //   if (prevProps.listProducts !== this.props.listProducts) {
+  //     const productItems = document.querySelectorAll(".product-item");
 
-      const observer = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              entry.target.style.transitionDelay = `${index * 0.2}s`;
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0.5,
-        }
-      );
+  //     const observer = new IntersectionObserver(
+  //       (entries, observer) => {
+  //         entries.forEach((entry, index) => {
+  //           if (entry.isIntersecting) {
+  //             entry.target.classList.add("visible");
+  //             entry.target.style.transitionDelay = `${index * 0.2}s`;
+  //             observer.unobserve(entry.target);
+  //           }
+  //         });
+  //       },
+  //       {
+  //         threshold: 0.5,
+  //       }
+  //     );
 
-      productItems.forEach((item, index) => {
-        observer.observe(item);
-      });
-    }
-  }
+  //     productItems.forEach((item, index) => {
+  //       observer.observe(item);
+  //     });
+  //   }
+  // }
 
   //xử lý xem thêm redairact page product
   handleProdcut = () => {
@@ -62,15 +66,12 @@ class Product extends Component {
             <div className="unline scroll-item"></div>
           </div>
 
-          <div className="product-list row">
+          <div className="product-list">
             {listProducts &&
               listProducts.slice(0, 8).map((item, index) => {
                 return (
-                  <div
-                    className="product-item col-12 col-sm-6 col-md-4 col-lg-3"
-                    key={index}
-                  >
-                    <div className="product-item-img mt-5">
+                  <div className="product-item" key={index}>
+                    <div className="product-item-img">
                       <img
                         src={item.imgBlod || product_img}
                         alt={item.name || "product"}
@@ -88,10 +89,7 @@ class Product extends Component {
           </div>
 
           <div className="product-button">
-            <ButonPage
-              title='Xem thêm'
-              handleClick={() => this.handleProdcut()}
-            />
+            <ButonPage title="Xem thêm" handleClick={() => this.handleProdcut()} />
           </div>
         </div>
       </div>

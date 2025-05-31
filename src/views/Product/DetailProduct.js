@@ -27,7 +27,7 @@ class DetailProduct extends Component {
         return (
             <React.Fragment>
                 <Helmet>
-                    <title>NaCha - Product</title>
+                    <title>NaCha - DetailProduct</title>
                 </Helmet>
                 <Menu />
                 <div className="detail-product">

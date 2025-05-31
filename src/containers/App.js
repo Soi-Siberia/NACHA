@@ -18,7 +18,7 @@ import DetailProduct from '../views/Product/DetailProduct';
 import About from '../views/About/about';
 import Menu from '../views/Menu/Menu';
 import Contact from '../views/Contact/Contact';
-
+import Cart from '../views/ShoppingCart/Cart'
 // scroll
 import CustomScrollbars from '../components/CustomScrollbars';
 
@@ -81,9 +81,12 @@ const App = () => {
                             <Route path={'/menu'} render={(myPropsApp) => <Menu {...myPropsApp} scrollTop={scrollTop} />} />
 
                             <Route path={'/contact'} render={(myProps) => <Contact {...myProps} scrollTop={scrollTop} />} />
+                            <Route path={'/cart'} render={(myPropsApp) => <Cart {...myPropsApp} scrollTop={scrollTop} />} />
+
                         </Switch>
                     </CustomScrollbars>
                 </span>
+
                 <button
                     className={`btn-scroll-top ${isSrollTop && scrollTop > 200 ? 'show' : ''}`}
                     onClick={handleClickScrollTop}
