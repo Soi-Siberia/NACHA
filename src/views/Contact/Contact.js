@@ -5,6 +5,8 @@ import ParallaxSection from '../../components/Ui/ParallaxSection'
 import { useState } from 'react'
 import * as action from "../../store/actions";
 import { useDispatch } from 'react-redux'
+import { Helmet } from "react-helmet";
+
 
 
 
@@ -46,6 +48,9 @@ const ContactPage = (props) => {
 
     return (
         <>
+            <Helmet>
+                <title>NaCha - Contact</title>
+            </Helmet>
             <MenuHeader />
             <div className='Contact-full' style={{ backgroundColor: '#FDF6EE' }}>
                 <ParallaxSection

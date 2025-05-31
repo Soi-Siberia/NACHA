@@ -4,6 +4,7 @@ import Footer from '../../components/Footer/Footer';
 import ParallaxSection from '../../components/Ui/ParallaxSection'
 import LogoNacha from '../../assets/images/logo.jpg'
 import QRthanhtoan from '../../assets/images/qrthanhtoan.png'
+import { Helmet } from 'react-helmet'
 
 const menuData = [
     {
@@ -93,6 +94,9 @@ const Menu = (props) => {
 
     return (
         <>
+            <Helmet>
+                <title>NaCha - Menu</title>
+            </Helmet>
             <Menuheader />
             <ParallaxSection
                 title="Menu Menu Menu"

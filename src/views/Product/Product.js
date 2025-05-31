@@ -5,7 +5,7 @@ import * as action from "../../store/actions"
 import Menu from "../../components/layout/menuheader"
 import Footer from "../../components/Footer/Footer"
 import { withRouter } from 'react-router-dom';
-
+import { Helmet } from 'react-helmet';
 // import RegisterPackageGroupOrAcc from '../containers/Product/RegisterPackageGroupOrAcc';
 
 
@@ -13,23 +13,22 @@ import { withRouter } from 'react-router-dom';
 class Product extends Component {
 
     constructor(props) {
-    super(props);
+        super(props);
         this.state = {
-            categories:[],
+            categories: [],
             listProduct: [],
             idSearch: "all",
             searchKeyword: "",
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.getAllProductStart()
         this.props.getAllCategoryStart()
     }
 
     componentDidUpdate(prevProps) {
-        if(prevProps.listProducts !== this.props.listProducts)
-        {
+        if (prevProps.listProducts !== this.props.listProducts) {
             // console.log("==> listProducts: ", this.props.listProducts)
 
             // let price = allcodes.map(price => price.product_allcode.price).join(' - ')
@@ -38,8 +37,7 @@ class Product extends Component {
             })
         }
 
-        if(prevProps.listCategory !== this.props.listCategory)
-        {
+        if (prevProps.listCategory !== this.props.listCategory) {
             // console.log("==> list listCategory", this.props.listCategory)
             this.setState({
                 categories: this.props.listCategory
@@ -48,14 +46,14 @@ class Product extends Component {
     }
 
     //sử lý seach category
-    handleSearchCategory = (key) =>{
+    handleSearchCategory = (key) => {
         // console.log("Search Category: ", key)
-        if(key === 'all'){
+        if (key === 'all') {
             this.setState({
                 idSearch: key
             })
 
-        }else{
+        } else {
 
             this.setState({
                 idSearch: key.id
@@ -64,7 +62,7 @@ class Product extends Component {
         }
     }
     // search keyword
-    handleOnchangKeySearch=(e)=>{
+    handleOnchangKeySearch = (e) => {
         // console.log(e.target.value)
         this.setState({
             searchKeyword: e.target.value
@@ -72,7 +70,7 @@ class Product extends Component {
     }
 
     //detail product
-    handleDeailProduct = (e, id) =>{
+    handleDeailProduct = (e, id) => {
         // alert(`id prodcut: ${id}`)
         this.props.history.push(`/product/detail/${id}`)
 
@@ -84,22 +82,25 @@ class Product extends Component {
         // console.log("==> listProduct", listProduct)
         let idSearch = this.state.idSearch
 
-        let listProductCategory = idSearch === "all" ? listProducts: listProducts.filter(product => product.categories.some(cate => cate.id === idSearch))
+        let listProductCategory = idSearch === "all" ? listProducts : listProducts.filter(product => product.categories.some(cate => cate.id === idSearch))
 
         let listProduct = listProductCategory.filter(product => product.name.toLowerCase().includes(this.state.searchKeyword.toLowerCase()))
         // console.log("list product key word: ", Product)
         return (
             <React.Fragment>
+                <Helmet>
+                    <title>NaCha - Product</title>
+                </Helmet>
                 <Menu />
                 <div className="product-page">
                     <div className='container product-container'>
                         <div className='product-title'>
                             <h1 className="title">HOT HOT SẢN PHẢM NACHA</h1>
                             <div className="filter-bar">
-                                <input 
-                                    className="search-input" 
-                                    placeholder="Tìm nhanh món mình thích thích thích...." 
-                                    onChange={(e)=> this.handleOnchangKeySearch(e)}/>
+                                <input
+                                    className="search-input"
+                                    placeholder="Tìm nhanh món mình thích thích thích...."
+                                    onChange={(e) => this.handleOnchangKeySearch(e)} />
                             </div>
                         </div>
 
@@ -109,12 +110,12 @@ class Product extends Component {
                                 <ul className="category-list">
                                     <li
                                         className={idSearch === 'all' ? "category-item active" : "category-item"}
-                                        onClick={()=>this.handleSearchCategory("all")}>Tất Cả
+                                        onClick={() => this.handleSearchCategory("all")}>Tất Cả
                                     </li>
                                     {this.state.categories.map((item, index) => (
-                                        <li key={index} 
-                                            className={idSearch === item.id ? "category-item active":"category-item"}
-                                            onClick={()=>this.handleSearchCategory(item)}>{item.name}</li>
+                                        <li key={index}
+                                            className={idSearch === item.id ? "category-item active" : "category-item"}
+                                            onClick={() => this.handleSearchCategory(item)}>{item.name}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -127,10 +128,10 @@ class Product extends Component {
                                             // console.log("==> price: ", price)
                                             let minPrice = Math.min(...price)
                                             let maxPrice = Math.max(...price)
-                                            return(
+                                            return (
                                                 <div className="product-card" key={index}
-                                                    onClick={(e)=>this.handleDeailProduct(e, product.id)}
-                                                    >
+                                                    onClick={(e) => this.handleDeailProduct(e, product.id)}
+                                                >
                                                     <img src={product.imgBlod} alt={product.name} className="product-img" />
                                                     <h3>{product.name}</h3>
                                                     <p>{`${minPrice} - ${maxPrice} đ`}</p>

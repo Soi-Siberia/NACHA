@@ -3,12 +3,17 @@ import MenuHome from "../../components/layout/menuheader"
 import Footer from "../../components/Footer/Footer"
 import "./about.scss"
 import img from '../../assets/images/be-nacha.jpg'
+import { Helmet } from "react-helmet";
+
 const about = (props) => {
 
   // console.log("==> check props: ", props)
   let scrollTop = props.scrollTop
   return (
     <>
+      <Helmet>
+        <title> NaCha - About </title>
+      </Helmet>
       <MenuHome />
       <div
         className="about-full"

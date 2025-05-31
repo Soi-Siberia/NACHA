@@ -8,6 +8,7 @@ import wrapper_img from "../assets/wrapper_img/wrapper.png"
 import "./HomePage.scss"
 import ButonPage from "../components/Ui/ButonPage"
 import { useHistory } from 'react-router-dom';
+import { Helmet } from "react-helmet"
 
 
 const HomePage = () => {
@@ -18,6 +19,9 @@ const HomePage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>NaCha - Home</title>
+      </Helmet>
       <div className="homePage-container" style={{ backgroundColor: '#FDF6EE' }}>
         <MenuHome />
         <div style={{ paddingTop: '52px' }}>

@@ -4,6 +4,7 @@ import "../Product/DetailProduct.scss"
 // import * as action from "../../store/actions"
 import Menu from "../../components/layout/menuheader"
 import Footer from "../../components/Footer/Footer"
+import { Helmet } from 'react-helmet';
 // import { Redirect, Route, Switch } from 'react-router-dom';
 
 // import RegisterPackageGroupOrAcc from '../containers/Product/RegisterPackageGroupOrAcc';
@@ -13,18 +14,21 @@ import Footer from "../../components/Footer/Footer"
 class DetailProduct extends Component {
 
 
-    componentDidMount(){
+    componentDidMount() {
 
     }
 
     componentDidUpdate(prevProps) {
-        
+
     }
 
 
     render() {
         return (
             <React.Fragment>
+                <Helmet>
+                    <title>NaCha - Product</title>
+                </Helmet>
                 <Menu />
                 <div className="detail-product">
                     <div className='detail-product-container container'>

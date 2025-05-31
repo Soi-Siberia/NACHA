@@ -47,7 +47,7 @@ class Login extends Component {
     //     navigate(`${redirectPath}`);
     // }
 
-    processLogin =() => {
+    processLogin = () => {
         const { username, password } = this.state;
 
         let adminInfo = {
@@ -56,7 +56,7 @@ class Login extends Component {
         }
 
         this.props.adminLoginStart(adminInfo);
-        console.log("===> Data login: ", adminInfo)
+        // console.log("===> Data login: ", adminInfo)
         // this.refresh();
     }
 
