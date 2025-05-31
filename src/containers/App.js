@@ -26,9 +26,18 @@ const App = () => {
     const [scrollTop, setScrollTop] = useState(0);
     const location = useLocation()
     const scrollRef = useRef(null); // tham chiếu đến dom element con
+    const [scrollPercent, setScrollPercent] = useState(0)
 
+
+    //scroll to top animation parallax
     const handleScroll = (values) => {
         setScrollTop(values.scrollTop);
+
+        const totalScroll = values.scrollHeight - values.clientHeight
+        console.log("==> totalScroll: ", totalScroll)
+        const progress = totalScroll > 0 ? (scrollTop / totalScroll) : 0;
+        console.log("==>check progress: ", progress)
+        setScrollPercent(progress)
     };
 
     const handeOnSrollTop = () => {
@@ -41,7 +50,12 @@ const App = () => {
         if (isSrollTop && scrollRef.current) {
             scrollRef.current.scrollTop(0)
         }
-    }, [location.pathname])
+    }, [location.pathname, isSrollTop])
+    const handleClickScrollTop = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop(0);
+        }
+    };
 
     return (
         <>
@@ -70,6 +84,30 @@ const App = () => {
                         </Switch>
                     </CustomScrollbars>
                 </span>
+                <button
+                    className={`btn-scroll-top ${isSrollTop && scrollTop > 200 ? 'show' : ''}`}
+                    onClick={handleClickScrollTop}
+                >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 15l6-6 6 6" stroke="#444" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <svg className="progress-ring" width="52" height="52">
+                        <circle
+                            className="progress-ring-circle"
+                            stroke="#00bcd4"
+                            strokeWidth="4"
+                            fill="transparent"
+                            r="24"
+                            cx="26"
+                            cy="26"
+                            style={{
+                                strokeDasharray: `${2 * Math.PI * 24}`,
+                                strokeDashoffset: `${2 * Math.PI * 24 * (1 - scrollPercent)}`
+                            }}
+                        />
+                    </svg>
+                </button>
+
                 <ToastContainer
                     position="top-right"
                     autoClose={2500}

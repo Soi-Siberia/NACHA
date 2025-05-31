@@ -82,9 +82,6 @@ const menuData = [
 const chunkArray = (arr, size) => {
     const result = [];
     for (let i = 0; i < arr.length; i += size) {
-        console.log("-----------------------------------------------------------")
-        console.log("--> giá trị i: ", i, "Và --> size: ", size, " --> Và arr: ", arr)
-        console.log("-----------------------------------------------------------")
         result.push(arr.slice(i, i + size));
     }
     // console.log("==> giá trị result: ", result)
@@ -119,8 +116,8 @@ const Menu = (props) => {
                                             <img src={QRthanhtoan}
                                                 alt="QR Code"
                                                 style={{
-                                                    width: '80%',
-                                                    height: '80%'
+                                                    width: '50%',
+                                                    height: '50%'
                                                 }}
                                             />
                                         </div>
@@ -129,8 +126,8 @@ const Menu = (props) => {
                                         >
                                             <img src={LogoNacha}
                                                 style={{
-                                                    width: '80%',
-                                                    height: '80%',
+                                                    width: '50%',
+                                                    height: '50%',
                                                     borderRadius: '100%'
                                                 }}
                                                 alt="Nacha Logo"

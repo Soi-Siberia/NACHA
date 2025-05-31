@@ -1,5 +1,4 @@
 
-import { connect } from "react-redux"
 import MenuHome from "../../components/layout/menuheader"
 import Footer from "../../components/Footer/Footer"
 import "./about.scss"

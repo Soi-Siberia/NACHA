@@ -9,19 +9,19 @@ $border-color: #ddd;
 $background-color: #EAE7DE;
 $white: white;
 
-.selection-container-full{
-    margin-top: 40px !important;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: $background-color;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.selection-container-full {
+  margin-top: 40px !important;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: $background-color;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    .title {
-        text-align: center;
-        color: $text-color;
-        margin-bottom: 20px;
+  .title {
+    text-align: center;
+    color: $text-color;
+    margin-bottom: 20px;
   }
 
   .select-group {
@@ -69,11 +69,57 @@ $white: white;
   }
 
   .results-section {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: $white;
-    border-radius: 4px;
-    border-left: 4px solid $primary-color;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: lighten($background-color, 5%);
+    border-radius: 8px;
+    border-left: 5px solid $primary-color;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+    h3 {
+      color: $primary-color;
+      margin-bottom: 15px;
+      font-size: 20px;
+      border-bottom: 1px solid $border-color;
+      padding-bottom: 8px;
+    }
+
+    p {
+      margin: 8px 0;
+      font-size: 16px;
+      color: $light-text;
+
+      strong {
+        color: $text-color;
+      }
+    }
+
+    .address-list {
+      margin-top: 15px;
+
+      h4 {
+        font-size: 17px;
+        color: $text-color;
+        margin-bottom: 10px;
+      }
+
+      ul {
+        padding-left: 20px;
+        list-style: disc;
+
+        li {
+          margin-bottom: 6px;
+          font-size: 15px;
+          line-height: 1.5;
+          color: #333;
+        }
+      }
+
+      p {
+        font-style: italic;
+        color: darken($disabled-color, 20%);
+      }
+    }
   }
 }
 
@@ -82,7 +128,7 @@ $white: white;
   .selection-container {
     padding: 15px;
 
-    .select-box, 
+    .select-box,
     .show-results-btn {
       padding: 8px;
       font-size: 14px;
