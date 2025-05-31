@@ -26,7 +26,6 @@ const App = () => {
     const [scrollTop, setScrollTop] = useState(0);
     const location = useLocation()
     const scrollRef = useRef(null); // tham chiếu đến dom element con
-    console.log("==> check local: ", location)
 
     const handleScroll = (values) => {
         setScrollTop(values.scrollTop);
@@ -65,7 +64,8 @@ const App = () => {
                             <Route path={'/product/detail/:id'} component={DetailProduct} />
                             <Route path={path.HomePage} component={HomePage} />
                             <Route path={'/about'} render={(myProps) => <About {...myProps} scrollTop={scrollTop} />} />
-                            <Route path={'/menu'} component={Menu} />
+                            <Route path={'/menu'} render={(myPropsApp) => <Menu {...myPropsApp} scrollTop={scrollTop} />} />
+
                             <Route path={'/contact'} render={(myProps) => <Contact {...myProps} scrollTop={scrollTop} />} />
                         </Switch>
                     </CustomScrollbars>

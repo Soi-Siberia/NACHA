@@ -50,15 +50,6 @@ const about = (props) => {
 
 
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
 
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(about);
+export default about;
