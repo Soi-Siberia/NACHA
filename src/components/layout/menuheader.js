@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import "./menuheader.scss";
-import logo from '../../assets/images/logo.jpg'
-// import { FormattedMessage } from "react-intl";
-
-// Cấu hình ngôn ngữ
+import logo from "../../assets/images/logo.jpg";
 
 const menuItems = [
   { label: "TRANG CHỦ", key: "homepage", path: "/homepage" },
@@ -17,69 +14,64 @@ const menuItems = [
 ];
 
 class menuheader extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      isActive: "",
-    }
+      isMenuOpen: false,
+    };
   }
-
 
   handleLinkMenu = (path) => {
     if (this.props.location.pathname !== path) {
       this.props.history.push(path);
     }
-  }
+    this.setState({ isMenuOpen: false }); // đóng menu sau khi click
+  };
+
+  toggleMenu = () => {
+    this.setState((prevState) => ({
+      isMenuOpen: !prevState.isMenuOpen,
+    }));
+  };
+
   render() {
     const currentPath = this.props.location.pathname;
+    const { isMenuOpen } = this.state;
 
     return (
-      <React.Fragment>
-        <div className="navbar-full">
-          <nav className="navbar container">
-            <div className="logo-menu"
-              onClick={() => this.handleLinkMenu('/homepage')}
-            >
-              <img src={logo} alt="Logo" />
-            </div>
-            <ul className="nav-links">
-              {menuItems.map((item) => (
-                <li
-                  key={item.key}
-                  className={currentPath === item.path ? "active" : ""}
-                  onClick={() => this.handleLinkMenu(item.path)}
-                >
-                  {item.label}
-                </li>
-              ))}
+      <div className="navbar-full">
+        <nav className="navbar container">
+          <div className="logo-menu" onClick={() => this.handleLinkMenu("/homepage")}>
+            <img src={logo} alt="Logo" />
+          </div>
 
-              <li className="flag"
-                onClick={() => this.handleLinkMenu('/cart')}
+          <div className="menu-toggle" onClick={this.toggleMenu}>
+            {isMenuOpen ? ("x") : "☰"}
+          </div>
+
+          <ul className={`nav-links ${isMenuOpen ? "show" : ""}`}>
+            {menuItems.map((item) => (
+              <li
+                key={item.key}
+                className={currentPath === item.path ? "active" : ""}
+                onClick={() => this.handleLinkMenu(item.path)}
               >
-                <i class="fas fa-shopping-cart"></i>
+                {item.label}
               </li>
-              {/* <li className="separator">|</li>
-              <li className="icon">🔍</li>
-              <li className="icon">☰</li> */}
-            </ul>
-          </nav>
-        </div>
+            ))}
 
-      </React.Fragment>
+            <li className="flag" onClick={() => this.handleLinkMenu("/cart")}>
+              <i className="fas fa-shopping-cart"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {
-  };
+  return {};
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    //ánh xạ (map) accsion redux  thành props để gọi sử dụ
-  };
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(menuheader));
+export default withRouter(connect(mapStateToProps)(menuheader));

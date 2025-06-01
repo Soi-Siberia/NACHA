@@ -144,6 +144,9 @@ class Product extends Component {
 
                                 </div>
                             </div>
+                            <div className='product-order'>
+
+                            </div>
                         </div>
                     </div>
                     <Footer />

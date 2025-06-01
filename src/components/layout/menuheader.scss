@@ -1,4 +1,4 @@
-// Biến SCSS
+// menuheader.scss
 $primary-color: red;
 $navbar-height: 75px;
 $font-main: Arial, sans-serif;
@@ -9,7 +9,6 @@ $font-main: Arial, sans-serif;
   width: 100%;
   background-color: #F2EFEA;
   padding: 0 20px;
-  // height: $navbar-height;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   animation: slideDown 0.6s ease-in-out;
 
@@ -17,7 +16,7 @@ $font-main: Arial, sans-serif;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px !important;
+    padding: 0 !important;
 
     .logo-menu {
       cursor: pointer;
@@ -75,7 +74,8 @@ $font-main: Arial, sans-serif;
         animation: activePulse 0.6s ease;
       }
 
-      .flag img {
+      .flag img,
+      .flag i {
         height: 16px;
         width: auto;
         transition: transform 0.3s ease;
@@ -100,11 +100,59 @@ $font-main: Arial, sans-serif;
         }
       }
     }
+
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+    }
   }
 }
 
+@media (max-width: 991px) {
+  .navbar-full {
+    padding: 0 10px;
 
-// Animation
+    .navbar {
+      flex-direction: row;
+      justify-content: space-between;
+
+      .nav-links {
+        // Chuyển menu mobile trượt từ bên trái sang
+        position: fixed;
+        top: 0;
+        left: -100%; // <-- CHỖ NÀY: ban đầu menu nằm ngoài bên trái
+        height: 100vh;
+        width: 240px;
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #F2EFEA;
+        padding: 80px 20px 20px 20px;
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); // <-- CHỖ NÀY: animation mượt hơn
+        z-index: 999;
+
+        &.show {
+          left: 0; // <-- CHỖ NÀY: khi bật menu thì hiển thị
+          box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
+        }
+
+        li {
+          width: 100%;
+          padding: 12px 0;
+        }
+
+        .icon {
+          display: none;
+        }
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+  }
+}
+
 @keyframes slideDown {
   0% {
     opacity: 0;
