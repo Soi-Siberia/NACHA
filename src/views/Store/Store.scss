@@ -1,0 +1,27 @@
+.store-full {
+    background-color: #FDF6EE !important;
+
+    .store-container {
+        // display: flex;
+        // justify-content: space-between;
+
+        .store-left {
+            .result-store {
+                .selection-container-full {
+                    background-color: unset !important;
+                    box-shadow: none !important;
+
+                    .selection-container {
+                        .title {
+                            font-size: 50px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .store-right {
+            // border: 1px solid red;
+        }
+    }
+}

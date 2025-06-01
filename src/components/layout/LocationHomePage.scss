@@ -120,6 +120,17 @@ $white: white;
         color: darken($disabled-color, 20%);
       }
     }
+
+    .stote-Map {
+      padding-top: 50px;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
 

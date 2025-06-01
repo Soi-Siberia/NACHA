@@ -19,6 +19,7 @@ import About from '../views/About/about';
 import Menu from '../views/Menu/Menu';
 import Contact from '../views/Contact/Contact';
 import Cart from '../views/ShoppingCart/Cart'
+import Store from '../views/Store/Store'
 // scroll
 import CustomScrollbars from '../components/CustomScrollbars';
 
@@ -79,7 +80,7 @@ const App = () => {
                             <Route path={path.HomePage} component={HomePage} />
                             <Route path={'/about'} render={(myProps) => <About {...myProps} scrollTop={scrollTop} />} />
                             <Route path={'/menu'} render={(myPropsApp) => <Menu {...myPropsApp} scrollTop={scrollTop} />} />
-
+                            <Route path={'/store'} render={(myPropsApp) => <Store {...myPropsApp} scrollTop={scrollTop} />} />
                             <Route path={'/contact'} render={(myProps) => <Contact {...myProps} scrollTop={scrollTop} />} />
                             <Route path={'/cart'} render={(myPropsApp) => <Cart {...myPropsApp} scrollTop={scrollTop} />} />
 

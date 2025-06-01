@@ -14,39 +14,13 @@ class Product extends Component {
   componentDidMount() {
     this.props.getAllProductStart();
 
-    // observeScrollItems(entry => {
-    //   if (entry.isIntersecting) {
-    //     entry.target.classList.add('show')
-    //   }
+    observeScrollItems(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show')
+      }
 
-    // })
+    })
   }
-  // componentDidUpdate(prevProps) {
-  //   // Khi danh sách sản phẩm được cập nhật thì khởi động lại observer
-  //   if (prevProps.listProducts !== this.props.listProducts) {
-  //     const productItems = document.querySelectorAll(".product-item");
-
-  //     const observer = new IntersectionObserver(
-  //       (entries, observer) => {
-  //         entries.forEach((entry, index) => {
-  //           if (entry.isIntersecting) {
-  //             entry.target.classList.add("visible");
-  //             entry.target.style.transitionDelay = `${index * 0.2}s`;
-  //             observer.unobserve(entry.target);
-  //           }
-  //         });
-  //       },
-  //       {
-  //         threshold: 0.5,
-  //       }
-  //     );
-
-  //     productItems.forEach((item, index) => {
-  //       observer.observe(item);
-  //     });
-  //   }
-  // }
-
   //xử lý xem thêm redairact page product
   handleProdcut = () => {
     this.props.history.push('/product')

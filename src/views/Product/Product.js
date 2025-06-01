@@ -95,7 +95,7 @@ class Product extends Component {
                 <div className="product-page">
                     <div className='container product-container'>
                         <div className='product-title'>
-                            <h1 className="title">HOT HOT SẢN PHẢM NACHA</h1>
+                            <h1 className="title">HOT HOT SẢN PHẨM NACHA</h1>
                             <div className="filter-bar">
                                 <input
                                     className="search-input"
@@ -124,10 +124,10 @@ class Product extends Component {
                                     {
                                         listProduct && listProduct.map((product, index) => {
                                             // console.log("==> product: ", product)
-                                            let price = product.allcodes.map(price => price.product_allcode.price)
+                                            // let price = product.allcodes.map(price => price.product_allcode.price)
                                             // console.log("==> price: ", price)
-                                            let minPrice = Math.min(...price)
-                                            let maxPrice = Math.max(...price)
+                                            // let minPrice = Math.min(...price)
+                                            // let maxPrice = Math.max(...price)
                                             return (
                                                 <div className="product-card" key={index}
                                                     onClick={(e) => this.handleDeailProduct(e, product.id)}
