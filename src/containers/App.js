@@ -35,9 +35,9 @@ const App = () => {
         setScrollTop(values.scrollTop);
 
         const totalScroll = values.scrollHeight - values.clientHeight
-        console.log("==> totalScroll: ", totalScroll)
+        // console.log("==> totalScroll: ", totalScroll)
         const progress = totalScroll > 0 ? (scrollTop / totalScroll) : 0;
-        console.log("==>check progress: ", progress)
+        // console.log("==>check progress: ", progress)
         setScrollPercent(progress)
     };
 

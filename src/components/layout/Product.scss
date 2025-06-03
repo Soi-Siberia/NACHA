@@ -127,3 +127,55 @@
         }
     }
 }
+
+@media (max-width: 1024px) {
+
+    // Tablet
+    .Product-container-full {
+        .Product-container {
+            .product-title {
+                text-align: center;
+            }
+
+            .product-list {
+                grid-template-columns: repeat(3, 1fr); // 3 sản phẩm
+
+                .product-item-mota {
+                    span {
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3; // Hoặc 4 nếu bạn thích
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+
+    // Điện thoại
+    .Product-container-full {
+        .Product-container {
+            .product-title {
+                text-align: center;
+            }
+
+            .product-list {
+                grid-template-columns: repeat(2, 1fr); // 2 sản phẩm
+
+                .product-item-mota {
+                    span {
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3; // Hoặc 4 nếu bạn thích
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+        }
+    }
+}
