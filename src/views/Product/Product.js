@@ -144,9 +144,9 @@ class Product extends Component {
 
                                 </div>
                             </div>
-                            <div className='product-order'>
+                            {/* <div className='product-order'>
 
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <Footer />

@@ -23,10 +23,10 @@ class menuheader extends Component {
 
   handleLinkMenu = (path) => {
     if (this.props.location.pathname !== path) {
-      console.log("Chuyển đến trang:", path);
+      // console.log("Chuyển đến trang:", path);
       this.props.history.push(path);
     } else {
-      console.log("Đang ở trang hiện tại:", path);
+      // console.log("Đang ở trang hiện tại:", path);
       window.location.href = path; // Cập nhật lại giao diện nếu đang ở trang hiện tại
     }
     this.setState({ isMenuOpen: false }); // đóng menu sau khi click
