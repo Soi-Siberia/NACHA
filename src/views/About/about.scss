@@ -28,7 +28,7 @@
   .ablout-content {
     padding-left: 10%;
     font-family: 'Nunito', sans-serif;
-    height: 660px;
+    // height: 660px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,4 +58,63 @@
     }
   }
 
+}
+
+/* CSS dành riêng cho tablet */
+@media (min-width: 769px) and (max-width: 992px) {
+  .about-full {
+    .ablout-content {
+      flex-direction: column-reverse;
+      align-items: center;
+      height: auto;
+
+      .about-img {
+        text-align: center;
+
+        img {
+          width: 80% !important;
+          height: 80% !important;
+        }
+      }
+
+      .content-info {
+        padding-top: 10%;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .about-full {
+    .about-container {
+      .about-section {
+        height: 300px;
+        padding-top: 120px;
+
+        h1 {
+          font-size: 50px;
+          letter-spacing: 6px;
+        }
+      }
+    }
+
+    .ablout-content {
+      flex-direction: column-reverse;
+      align-items: center;
+      height: auto;
+
+      .about-img {
+        text-align: center;
+
+        img {
+          width: 60% !important;
+          height: 60% !important;
+        }
+      }
+
+      .content-info {
+        padding-top: 10%;
+      }
+    }
+  }
 }
