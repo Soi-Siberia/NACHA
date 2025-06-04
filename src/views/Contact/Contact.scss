@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
 
 .contact-tile {
+    text-align: center;
 
     h1 {
-        padding-top: 100px;
+        padding-top: 50px;
         font-family: 'Nunito';
         // transform: translate(-50%, -50%);
         color: #BE1E4C;
@@ -14,10 +15,11 @@
 
 .contact-container {
     display: flex;
-    gap: 40px;
+    align-items: flex-start;
     padding: 20px;
     font-family: 'Arial', sans-serif;
     padding-top: 100px;
+    gap: 30px;
 
     .contact-form {
         flex: 2;
@@ -49,8 +51,10 @@
 
     .contact-info {
         flex: 1;
+        position: sticky;
         display: flex;
         flex-direction: column;
+        top: 100px;
         gap: 30px;
         justify-content: flex-start;
 
