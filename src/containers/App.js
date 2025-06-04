@@ -20,6 +20,7 @@ import Menu from '../views/Menu/Menu';
 import Contact from '../views/Contact/Contact';
 import Cart from '../views/ShoppingCart/Cart'
 import Store from '../views/Store/Store'
+import HOMETEST from '../views/Home/Home';
 // scroll
 import CustomScrollbars from '../components/CustomScrollbars';
 
@@ -77,12 +78,15 @@ const App = () => {
                             <Route path={'/category/'} component={Category} />
                             <Route path={'/product/'} exact component={Product} />
                             <Route path={'/product/detail/:id'} component={DetailProduct} />
-                            <Route path={path.HomePage} component={HomePage} />
+                            {/* <Route path={path.HomePage} component={HomePage} /> */}
+                            <Route path={path.HomePage} render={(myProps) => <HomePage {...myProps} scrollTop={scrollTop} />} />
                             <Route path={'/about'} render={(myProps) => <About {...myProps} scrollTop={scrollTop} />} />
                             <Route path={'/menu'} render={(myPropsApp) => <Menu {...myPropsApp} scrollTop={scrollTop} />} />
                             <Route path={'/store'} render={(myPropsApp) => <Store {...myPropsApp} scrollTop={scrollTop} />} />
                             <Route path={'/contact'} render={(myProps) => <Contact {...myProps} scrollTop={scrollTop} />} />
                             <Route path={'/cart'} render={(myPropsApp) => <Cart {...myPropsApp} scrollTop={scrollTop} />} />
+                            <Route path={'/TESTSILDER'} render={(myPropsApp) => <HOMETEST {...myPropsApp} scrollTop={scrollTop} />} />
+
 
                         </Switch>
                     </CustomScrollbars>

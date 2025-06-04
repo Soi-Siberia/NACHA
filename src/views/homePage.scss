@@ -1,112 +1,113 @@
 .homePage-container {
+    .homePage-Pala {
+        .homePage-content {
 
-    .homePage-content {
+            .wp_wrapper {
 
-        .wp_wrapper {
+                .wp-content-right {
+                    width: 50%;
+                    margin-left: auto;
+                    padding-top: 50px;
 
-            .wp-content-right {
-                width: 50%;
-                margin-left: auto;
-                padding-top: 50px;
+                    .sub-title {
+                        font-size: 18px;
+                        font-style: italic;
+                        line-height: 27px;
+                        letter-spacing: 0;
+                        color: #ffffff;
+                    }
 
-                .sub-title {
-                    font-size: 18px;
-                    font-style: italic;
-                    line-height: 27px;
-                    letter-spacing: 0;
-                    color: #ffffff;
-                }
+                    .title {
+                        text-align: start;
+                        font-size: 32px;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        color: white;
+                        font-family: 'Segoe UI', sans-serif;
+                        letter-spacing: 2px;
+                        text-shadow: 2px 4px 3px rgba(0, 0, 0, 3.5);
+                        /* bóng chữ để nổi hơn */
+                    }
 
-                .title {
-                    text-align: start;
-                    font-size: 32px;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                    color: white;
-                    font-family: 'Segoe UI', sans-serif;
-                    letter-spacing: 2px;
-                    text-shadow: 2px 4px 3px rgba(0, 0, 0, 3.5);
-                    /* bóng chữ để nổi hơn */
-                }
+                    .underline {
+                        width: 20%;
+                        height: 5px;
+                        background-color: white;
+                        border-radius: 2px;
+                        margin: 30px 0px;
+                        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+                        /* bóng chữ để nổi hơn */
+                    }
 
-                .underline {
-                    width: 20%;
-                    height: 5px;
-                    background-color: white;
-                    border-radius: 2px;
-                    margin: 30px 0px;
-                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-                    /* bóng chữ để nổi hơn */
-                }
+                    .content {
+                        font-size: 16px;
+                        line-height: 24px;
+                        letter-spacing: 0;
+                        color: #ffffff;
+                        font-style: italic;
+                        box-shadow: none;
+                        margin: 0px 0px 0px 10px;
+                        width: 80%;
+                        line-height: 1.8em;
+                        text-align: justify;
+                    }
 
-                .content {
-                    font-size: 16px;
-                    line-height: 24px;
-                    letter-spacing: 0;
-                    color: #ffffff;
-                    font-style: italic;
-                    box-shadow: none;
-                    margin: 0px 0px 0px 10px;
-                    width: 80%;
-                    line-height: 1.8em;
-                    text-align: justify;
-                }
+                    .xemthem-btn {
+                        margin-top: 30px;
 
-                .xemthem-btn {
-                    margin-top: 30px;
+                        a {
+                            padding: 20px 35px;
+                            display: inline;
+                            background-color: #BE1E4C;
 
-                    a {
-                        padding: 20px 35px;
-                        display: inline;
-                        background-color: #BE1E4C;
+                            &:hover {
+                                background-color: #ffffff;
+                                color: #000000;
+                                text-decoration: none;
+                            }
 
-                        &:hover {
-                            background-color: #ffffff;
-                            color: #000000;
-                            text-decoration: none;
-                        }
-
-                        .xemthem {
-                            font-weight: 800;
-                            letter-spacing: 2px;
-                            font-size: 13px;
-                            line-height: 1.7em;
+                            .xemthem {
+                                font-weight: 800;
+                                letter-spacing: 2px;
+                                font-size: 13px;
+                                line-height: 1.7em;
+                            }
                         }
                     }
-                }
 
-                .sub-title,
-                .title,
-                .underline,
-                .content,
-                .xemthem-btn {
-                    transform: translateY(20px);
-                    opacity: 0;
-                    animation: fadeUp 0.8s ease forwards;
-                }
+                    .sub-title,
+                    .title,
+                    .underline,
+                    .content,
+                    .xemthem-btn {
+                        transform: translateY(20px);
+                        opacity: 0;
+                        animation: fadeUp 0.8s ease forwards;
+                    }
 
-                .sub-title {
-                    animation-delay: 0.1s;
-                }
+                    .sub-title {
+                        animation-delay: 0.1s;
+                    }
 
-                .title {
-                    animation-delay: 0.3s;
-                }
+                    .title {
+                        animation-delay: 0.3s;
+                    }
 
-                .underline {
-                    animation-delay: 0.5s;
-                }
+                    .underline {
+                        animation-delay: 0.5s;
+                    }
 
-                .content {
-                    animation-delay: 0.7s;
-                }
+                    .content {
+                        animation-delay: 0.7s;
+                    }
 
-                .xemthem-btn {
-                    animation-delay: 0.9s;
-                }
+                    .xemthem-btn {
+                        animation-delay: 0.9s;
+                    }
 
-                .xemthem-btn {
-                    animation-delay: 1s;
+                    .xemthem-btn {
+                        animation-delay: 1s;
+                    }
                 }
             }
         }

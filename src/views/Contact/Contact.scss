@@ -11,12 +11,17 @@
         font-size: 50px;
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     }
+
+    .content-title {
+        font-size: 20px;
+        font-style: 300;
+    }
 }
 
 .contact-container {
     display: flex;
     align-items: flex-start;
-    padding: 20px;
+    padding-top: 50px !important;
     font-family: 'Arial', sans-serif;
     padding-top: 100px;
     gap: 30px;
