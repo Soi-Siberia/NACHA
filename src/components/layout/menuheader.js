@@ -64,9 +64,9 @@ class menuheader extends Component {
               </li>
             ))}
 
-            <li className="flag" onClick={() => this.handleLinkMenu("/cart")}>
+            {/* <li className="flag" onClick={() => this.handleLinkMenu("/cart")}>
               <i className="fas fa-shopping-cart"></i>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>

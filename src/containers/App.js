@@ -77,7 +77,7 @@ const App = () => {
                             {/*client*/}
                             <Route path={'/category/'} component={Category} />
                             <Route path={'/product/'} exact component={Product} />
-                            <Route path={'/product/detail/:id'} component={DetailProduct} />
+                            <Route path={'/product/:name'} component={DetailProduct} />
                             {/* <Route path={path.HomePage} component={HomePage} /> */}
                             <Route path={path.HomePage} render={(myProps) => <HomePage {...myProps} scrollTop={scrollTop} />} />
                             <Route path={'/about'} render={(myProps) => <About {...myProps} scrollTop={scrollTop} />} />
@@ -99,18 +99,18 @@ const App = () => {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M6 15l6-6 6 6" stroke="#444" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <svg className="progress-ring" width="52" height="52">
+                    <svg className="progress-ring" width="40" height="40">
                         <circle
                             className="progress-ring-circle"
                             stroke="#00bcd4"
                             strokeWidth="4"
                             fill="transparent"
-                            r="24"
-                            cx="26"
-                            cy="26"
+                            r="18"
+                            cx="20"
+                            cy="20"
                             style={{
-                                strokeDasharray: `${2 * Math.PI * 24}`,
-                                strokeDashoffset: `${2 * Math.PI * 24 * (1 - scrollPercent)}`
+                                strokeDasharray: `${2 * Math.PI * 18}`,
+                                strokeDashoffset: `${2 * Math.PI * 18 * (1 - scrollPercent)}`
                             }}
                         />
                     </svg>

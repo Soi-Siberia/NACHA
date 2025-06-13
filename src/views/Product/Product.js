@@ -6,6 +6,7 @@ import Menu from "../../components/layout/menuheader"
 import Footer from "../../components/Footer/Footer"
 import { withRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import DetailProdut from '../../components/layout/DetailProdut';
 // import RegisterPackageGroupOrAcc from '../containers/Product/RegisterPackageGroupOrAcc';
 
 
@@ -17,8 +18,10 @@ class Product extends Component {
         this.state = {
             categories: [],
             listProduct: [],
+            detailProduct: [],
             idSearch: "all",
             searchKeyword: "",
+            isOpenDetailProduct: false,
         };
     }
 
@@ -70,9 +73,13 @@ class Product extends Component {
     }
 
     //detail product
-    handleDeailProduct = (e, id) => {
+    handleDeailProduct = (product) => {
         // alert(`id prodcut: ${id}`)
-        this.props.history.push(`/product/detail/${id}`)
+        // this.props.history.push(`/product/${product.name}`)
+        this.setState({
+            isOpenDetailProduct: true,
+            detailProduct: product
+        })
 
     }
 
@@ -130,7 +137,7 @@ class Product extends Component {
                                             // let maxPrice = Math.max(...price)
                                             return (
                                                 <div className="product-card" key={index}
-                                                    onClick={(e) => this.handleDeailProduct(e, product.id)}
+                                                    onClick={() => this.handleDeailProduct(product)}
                                                 >
                                                     <img src={product.imgBlod} alt={product.name} className="product-img" />
                                                     <h3>{product.name}</h3>
@@ -151,6 +158,13 @@ class Product extends Component {
                     </div>
                     <Footer />
                 </div>
+
+
+                <DetailProdut
+                    isOpenDetailProduct={this.state.isOpenDetailProduct}
+                    toggleNewCategory={() => this.setState({ isOpenDetailProduct: !this.state.isOpenDetailProduct })}
+                    detailProduct={this.state.detailProduct}
+                />
             </React.Fragment>
         );
     }

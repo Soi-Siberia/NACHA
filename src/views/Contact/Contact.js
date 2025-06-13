@@ -1,93 +1,132 @@
-import './Contact.scss'
-import MenuHeader from '../../components/layout/menuheader'
-import Footer from '../../components/Footer/Footer'
-import ParallaxSection from '../../components/Ui/ParallaxSection'
-import { useState } from 'react'
-import * as action from "../../store/actions";
-import { useDispatch } from 'react-redux'
-import { Helmet } from "react-helmet";
-
-
-
+import './Contact.scss';
+import MenuHeader from '../../components/layout/menuheader';
+import Footer from '../../components/Footer/Footer';
+import ParallaxSection from '../../components/Ui/ParallaxSection';
+import { useState } from 'react';
+import * as action from '../../store/actions';
+import { useDispatch } from 'react-redux';
+import { Helmet } from 'react-helmet';
+// Optional: Thêm toast để thay thế alert
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactPage = (props) => {
-    //user redux.
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const [dataContact, setDataContact] = useState({
         name: '',
         mail: '',
         noidung: '',
         phone: '',
-    })
+    });
 
+    const [loading, setLoading] = useState(false);
 
     const handleInput = (e) => {
-        // console.log("Name: ", e.target.name, " Value: ", e.target.value)
-        setDataContact(prev => ({
+        setDataContact((prev) => ({
             ...prev,
-            [e.target.name]: e.target.value
-        }))
-    }
+            [e.target.name]: e.target.value,
+        }));
+    };
 
-    const handleSentContact = () => {
-        if (!dataContact.name || !dataContact.mail || !dataContact.noidung || !dataContact.phone) {
-            alert("Vui lòng điền đầy đủ thông tin.");
+    const handleSentContact = async () => {
+        const { name, mail, noidung, phone } = dataContact;
+
+        if (!name || !mail || !noidung || !phone) {
+            toast.error('Vui lòng điền đầy đủ thông tin.');
             return;
         }
 
-        if (!dataContact.mail.includes('@')) {
-            alert("Email không hợp lệ. Vui Lòng kiểm tra lại.");
+        if (!mail.includes('@')) {
+            toast.error('Email không hợp lệ. Vui lòng kiểm tra lại.');
             return;
         }
 
-        dispatch(action.SendMailContactStart(dataContact))
-        // console.log("DataContact: ", dataContact)
-        // alert("Sen data: ")
-    }
+        setLoading(true);
+        await dispatch(action.SendMailContactStart(dataContact));
+        setLoading(false);
+        toast.success('Gửi liên hệ thành công!');
+    };
 
     return (
         <>
             <Helmet>
-                <title>NaCha - Contact</title>
+                <title>NaCha - Liên Hệ</title>
+                <meta
+                    name="description"
+                    content="Liên hệ với NaCha để được tư vấn và hỗ trợ qua email hoặc số điện thoại."
+                />
+                <meta property="og:title" content="NaCha - Liên Hệ" />
+                <meta
+                    property="og:description"
+                    content="Liên hệ với NaCha để được tư vấn và hỗ trợ nhanh chóng."
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://yourdomain.com/contact" />
+                <link rel="canonical" href="https://yourdomain.com/contact" />
             </Helmet>
+
             <MenuHeader />
-            <div className='Contact-full' style={{ backgroundColor: '#FDF6EE' }}>
+            <div className="Contact-full" style={{ backgroundColor: '#FDF6EE', padding: '20px 0px' }}>
                 <ParallaxSection
                     title="Kết Nối"
-                    backgroudImage='https://picsum.photos/800/400'
+                    backgroudImage="https://picsum.photos/800/400"
                     scrollTop={props.scrollTop}
                 />
-                <div className='contact-tile container'>
+
+                <div className="contact-tile container">
                     <h1>Liên Hệ Với Chúng Tôi</h1>
-                    <div className='underline'></div>
-                    <div className='content-title'>
-                        Nếu bạn cần thêm thông tin hoặc trao đổi công việc xin vui lòng liên hệ với chúng tôi qua email hoặc số điện thoại được cung cấp bên dưới.
+                    <div className="underline"></div>
+                    <div className="content-title">
+                        Nếu bạn cần thêm thông tin hoặc trao đổi công việc, xin vui lòng liên hệ với chúng tôi qua email hoặc số điện thoại bên dưới.
                     </div>
                 </div>
+
                 <div className="contact-container container">
                     <div className="contact-form">
-                        <input type="text"
-                            name='name'
+                        <label htmlFor="name">Tên</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
                             placeholder="Tên của bạn"
-                            onChange={(e) => handleInput(e)}
+                            value={dataContact.name}
+                            onChange={handleInput}
                         />
-                        <input type="number"
-                            placeholder="Số điện thoại của bạn là gì"
-                            name='phone'
-                            onChange={(e) => handleInput(e)}
+
+                        <label htmlFor="phone">Số điện thoại</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Số điện thoại của bạn"
+                            value={dataContact.phone}
+                            onChange={handleInput}
                         />
-                        <input type="email"
+
+                        <label htmlFor="mail">Email</label>
+                        <input
+                            type="email"
+                            id="mail"
+                            name="mail"
                             placeholder="Email của bạn"
-                            name='mail'
-                            onChange={(e) => handleInput(e)}
+                            value={dataContact.mail}
+                            onChange={handleInput}
                         />
-                        <textarea placeholder="Lời nhắn của bạn"
+
+                        <label htmlFor="noidung">Lời nhắn</label>
+                        <textarea
+                            id="noidung"
+                            name="noidung"
                             rows="8"
-                            name='noidung'
-                            onChange={(e) => handleInput(e)}
+                            placeholder="Lời nhắn của bạn"
+                            value={dataContact.noidung}
+                            onChange={handleInput}
                         />
-                        <button type="submit" onClick={() => handleSentContact()}>GỬI</button>
+
+                        <button type="submit" onClick={handleSentContact} disabled={loading}>
+                            {loading ? 'Đang gửi...' : 'GỬI'}
+                        </button>
                     </div>
 
                     <div className="contact-info">
@@ -103,7 +142,7 @@ const ContactPage = (props) => {
                             <span className="icon">✉️</span>
                             <div>
                                 <h4>EMAIL</h4>
-                                <p>Email: nachaxinchao@gmail.com</p>
+                                <p>nachaxinchao@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -111,8 +150,7 @@ const ContactPage = (props) => {
             </div>
             <Footer />
         </>
-
-    )
-}
+    );
+};
 
 export default ContactPage;

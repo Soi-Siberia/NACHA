@@ -38,12 +38,12 @@ class slider extends Component {
           <div className="slider-item">
             <img src={slider_img2} alt="slider2"></img>
           </div>
-          <div className="slider-item">
+          {/* <div className="slider-item">
             <img src={slider_img3} alt="slider3"></img>
           </div>
           <div className="slider-item">
             <img src={slider_img4} alt="slider4"></img>
-          </div>
+          </div> */}
         </Slider>
 
       </React.Fragment>

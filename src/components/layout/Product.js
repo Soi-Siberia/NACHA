@@ -1,35 +1,53 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import * as action from "../../store/actions";
 import "./Product.scss";
-import { observeScrollItems } from "../../utils/scrollObserverHelperUtils"
+import { observeScrollItems } from "../../utils/scrollObserverHelperUtils";
 import product_img from "../../assets/product_img/Trà-Sữa-Phô-Mai-Nhung-Lụa-v2-550x550.png";
-import ButonPage from "../Ui/ButonPage"
+import ButonPage from "../Ui/ButonPage";
+import DetailProdut from "../layout/DetailProdut";
+import ContactWidget from "../layout/ContactWidget";
 
+const Product = () => {
+  const dispatch = useDispatch(); // = this.props.dispatch
+  const history = useHistory(); // = this.props.history
 
+  const [isOpenDetailProduct, setIsOpenDetailProduct] = useState(false); // state để quản lý việc mở chi tiết sản phẩm
+  const [detailProduct, setDetailProduct] = useState({}); // state để lưu thông tin chi tiết sản phẩm
 
+  // lấy listProducts từ Redux store
+  const listProducts = useSelector((state) => state.product.listProducts); // = this.props.listProducts
 
-class Product extends Component {
-  componentDidMount() {
-    this.props.getAllProductStart();
+  // tương đương componentDidMount
+  useEffect(() => {
+    dispatch(action.getAllProductStart()); // = this.props.getAllProductStart()
 
-    observeScrollItems(entry => {
+    observeScrollItems((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('show')
+        entry.target.classList.add("show");
       }
+    });
+  }, [dispatch]);
 
-    })
+  // sự kiện khi nhấn "Xem thêm"
+  const handleProdcut = () => {
+    history.push("/product"); // = this.props.history.push
+  };
+
+  const handleProdcutItem = (item) => {
+    // alert("Chức năng đang được phát triển");
+    setDetailProduct(item);
+    setIsOpenDetailProduct(true);
+    // console.log("item: ", item);
   }
-  //xử lý xem thêm redairact page product
-  handleProdcut = () => {
-    this.props.history.push('/product')
+
+  const toggleNewCategory = () => {
+    setIsOpenDetailProduct(!isOpenDetailProduct);
   }
-
-  render() {
-    const { listProducts } = this.props;
-
-    return (
+  console.log("DetailProduct: ", detailProduct, "isOpenDetailProduct: ", isOpenDetailProduct);
+  return (
+    <>
       <div className="Product-container-full">
         <div className="container Product-container">
           <div className="product-title">
@@ -42,45 +60,40 @@ class Product extends Component {
 
           <div className="product-list">
             {listProducts &&
-              listProducts.slice(0, 8).map((item, index) => {
-                return (
-                  <div className="product-item" key={index}>
-                    <div className="product-item-img">
-                      <img
-                        src={item.imgBlod || product_img}
-                        alt={item.name || "product"}
-                      />
-                    </div>
-                    <div className="product-item-name mt-3">
-                      <a href="https://www.google.com/">{item.name}</a>
-                    </div>
-                    <div className="product-item-mota mt-3">
-                      <span>{item.description}</span>
-                    </div>
+              listProducts.map((item, index) => (
+                <div className="product-item" key={index} onClick={() => handleProdcutItem(item)}>
+                  <div className="product-item-img">
+                    <img
+                      src={item.imgBlod || product_img}
+                      alt={item.name || "product"}
+                    />
                   </div>
-                );
-              })}
+                  <div className="product-item-name mt-3">
+                    <a href="https://www.google.com/">{item.name}</a>
+                  </div>
+                  <div className="product-item-mota mt-3">
+                    <span>{item.description}</span>
+                  </div>
+                </div>
+              ))}
           </div>
 
           <div className="product-button">
-            <ButonPage title="Xem thêm" handleClick={() => this.handleProdcut()} />
+            <ButonPage title="Xem thêm" handleClick={handleProdcut} />
           </div>
         </div>
       </div>
-    );
-  }
-}
 
-const mapStateToProps = (state) => {
-  return {
-    listProducts: state.product.listProducts,
-  };
+      <DetailProdut
+        isOpenDetailProduct={isOpenDetailProduct}
+        detailProduct={detailProduct}
+        toggleNewCategory={toggleNewCategory}
+      />
+
+      <ContactWidget />
+
+    </>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getAllProductStart: () => dispatch(action.getAllProductStart()),
-  };
-};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Product));
+export default Product;

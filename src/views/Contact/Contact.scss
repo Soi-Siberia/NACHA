@@ -1,12 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap');
-
 .contact-tile {
     text-align: center;
 
     h1 {
         padding-top: 50px;
-        font-family: 'Nunito';
-        // transform: translate(-50%, -50%);
+        font-family: 'Nunito', sans-serif;
         color: #BE1E4C;
         font-size: 50px;
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
@@ -14,17 +11,16 @@
 
     .content-title {
         font-size: 20px;
-        font-style: 300;
+        font-weight: 300;
     }
 }
 
 .contact-container {
     display: flex;
     align-items: flex-start;
-    padding-top: 50px !important;
-    font-family: 'Arial', sans-serif;
     padding-top: 100px;
     gap: 30px;
+    font-family: 'Arial', sans-serif;
 
     .contact-form {
         flex: 2;
@@ -35,33 +31,46 @@
         input,
         textarea {
             padding: 15px;
-            border: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             background-color: #ffffff;
             font-style: italic;
             font-size: 16px;
             color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+
+            &:focus {
+                border-color: #BE1E4C;
+                box-shadow: 0 0 0 2px rgba(190, 30, 76, 0.2);
+            }
         }
 
         button {
-            width: 100px;
-            padding: 12px;
+            min-width: 120px;
+            padding: 12px 20px;
             background-color: #c6224e;
             color: white;
             border: none;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             align-self: flex-end;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: darken(#c6224e, 10%);
+            }
         }
     }
 
     .contact-info {
         flex: 1;
         position: sticky;
+        top: 100px;
         display: flex;
         flex-direction: column;
-        top: 100px;
         gap: 30px;
-        justify-content: flex-start;
 
         .info-block {
             display: flex;
@@ -84,5 +93,33 @@
                 color: #555;
             }
         }
+    }
+}
+
+// Responsive
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+
+        .contact-form,
+        .contact-info {
+            width: 100%;
+        }
+
+        .contact-form {
+            order: 2;
+        }
+
+        .contact-info {
+            order: 1;
+        }
+    }
+
+    .contact-tile h1 {
+        font-size: 36px;
+    }
+
+    .contact-tile .content-title {
+        font-size: 16px;
     }
 }

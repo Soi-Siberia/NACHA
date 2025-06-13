@@ -12,12 +12,11 @@ import { Helmet } from "react-helmet"
 
 
 const HomePage = (props) => {
-  console.log("Check props from HomePage: ", props.scrollTop);
+  // console.log("Check props from HomePage: ", props.scrollTop);
   const history = useHistory()
   const handleClickTimHieuThem = () => {
     history.push('/about')
   }
-
   return (
     <>
       <Helmet>
@@ -25,7 +24,7 @@ const HomePage = (props) => {
       </Helmet>
       <div className="homePage-container" style={{ backgroundColor: '#FDF6EE' }}>
         <MenuHome />
-        <div style={{
+        <div className="" style={{
           paddingTop: '52px',
           transform: `translateY(${props.scrollTop * 0.4}px)`
         }}>
@@ -39,6 +38,7 @@ const HomePage = (props) => {
           <div className="homePage-content">
             <div className="wp_wrapper"
               style={{
+                marginTop: '-10px',
                 backgroundImage: `url(${wrapper_img})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
